@@ -19,6 +19,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const CANDIDATE_DASHBOARD = '/candidate/dashboard';
     public const COMPANY_DASHBOARD = '/company/dashboard';
+    public const ADMIN_DASHBOARD = '/admin/dashboard';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -36,6 +37,8 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+            Route::middleware('web')
+                ->group(base_path('routes/admin.php'));
         });
     }
 }
