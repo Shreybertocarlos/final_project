@@ -32,7 +32,17 @@
         <div class="header-right">
           <div class="block-signin">
             <!-- <a class="text-link-bd-btom hover-up" href="page-register.html">Register</a> -->
+            @guest
             <a class="btn btn-default btn-shadow ml-40 hover-up" href="{{ route('login') }}">Sign in</a>
+            @endguest
+            @auth
+            @if (auth()->user()->role === 'company')
+                    <a class="btn btn-default btn-shadow ml-40 hover-up" style="width: 200px" href="{{ route('company.dashboard') }}">Company Dashboard</a>
+                @elseif(auth()->user()->role === 'candidate')
+                    <a class="btn btn-default btn-shadow ml-40 hover-up" style="width: 200px" href="{{ route('candidate.dashboard') }}">Candidate Dashboard</a>
+                @endif
+            @endauth
+
           </div>
         </div>
       </div>
