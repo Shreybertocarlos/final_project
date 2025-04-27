@@ -36,6 +36,7 @@ class CompanyProfileController extends Controller
             ['user_id' => auth()->user()->id],
             $data
         );
+        notify()->success('Updated Successfully', 'Success!');
         return redirect()->back();
 
     }
