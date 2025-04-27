@@ -43,8 +43,29 @@ class CompanyProfileController extends Controller
 
     }
 
-    function updateFoundingInfo(CompanyFoundingInfoUpdateRequest $request) :RedirectResponse {
-        dd($request->all());
+
+
+
+
+        function updateFoundingInfo(CompanyFoundingInfoUpdateRequest $request) : RedirectResponse {
+            Company::updateOrCreate(
+                ['user_id' => auth()->user()->id],
+                [
+                    'industry_type_id' => $request->industry_type,
+                    'organization_type_id' => $request->organization_type,
+                    'team_size_id' => $request->team_size,
+                    'establishment_date' => $request->establishment_date,
+                    'website' => $request->website,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'country' => $request->country,
+                    'state' => $request->state,
+                    'city' => $request->city,
+                    'address' => $request->address,
+                    'map_link' => $request->map_link
+                ]
+            );
+        notify()->success('Updated Successfully', 'Success!');
 
         return redirect()->back();
 

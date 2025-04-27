@@ -20,13 +20,14 @@ class CompanyFoundingInfoUpdateRequest extends FormRequest
             'team_size' => ['required', 'integer'],
             'establishment_date' => ['required', 'date'],
             'website' => ['required', 'active_url'],
-            'email' => ['required', 'url'],
+            'email' => ['required', 'email'],
             'phone' => ['required'],
             'country' => ['required', 'integer'],
-            'state' => ['required', 'integer'],
-            'city' => ['required', 'integer'],
-            'address' => ['required','string', 'max:255'],
+            'state' => ['nullable', 'integer'],
+            'city' => ['nullable', 'integer'],
+            'address' => ['string', 'max:255'],
             'map_link' => ['nullable']
+
         ];
     }
 }
