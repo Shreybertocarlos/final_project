@@ -8,6 +8,7 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Traits\FileUploadTrait;
+use Illuminate\Http\RedirectResponse;
 
 class CompanyProfileController extends Controller
 {
@@ -18,7 +19,7 @@ class CompanyProfileController extends Controller
     }
     //
 
-    function updateCompanyInfo(CompanyInfoUpdateRequest $request)
+    function updateCompanyInfo(CompanyInfoUpdateRequest $request) : RedirectResponse
     {
         $logoPath = $this->uploadFile($request, 'logo');
         $bannerPath = $this->uploadFile($request, 'banner');
@@ -37,6 +38,13 @@ class CompanyProfileController extends Controller
             $data
         );
         notify()->success('Updated Successfully', 'Success!');
+        return redirect()->back();
+
+    }
+
+    function updateFoundingInfo(Request $request) :RedirectResponse {
+        dd($request->all());
+
         return redirect()->back();
 
     }
