@@ -47,7 +47,10 @@
                             <form action="{{ route('company.profile.company-info') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
+
+                                
                                     <div class="col-md-6">
+                                        <x-image-preview :height="200" :width="200" :source="$companyInfo?->logo" />
                                         <div class="form-group">
                                             <label class="font-sm color-text-mutted mb-10">Logo *</label>
                                             <input class="form-control {{ $errors->has('logo') ? 'is-invalid ': '' }}" type="file" value="" name="logo">
@@ -55,6 +58,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
+                                        <x-image-preview :height="200" :width="500" :source="$companyInfo?->banner" />
                                         <div class="form-group">
                                             <label class="font-sm color-text-mutted mb-10">Banner *</label>
                                             <input class="form-control {{ $errors->has('banner') ? 'is-invalid ': '' }}" type="file" value="" name="banner">
@@ -64,21 +68,21 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="font-sm color-text-mutted mb-10">Company Name *</label>
-                                            <input class="form-control {{ $errors->has('name') ? 'is-invalid ':'' }}" type="text" value="" name="name">
+                                            <input class="form-control {{ $errors->has('name') ? 'is-invalid ':'' }}" type="text" value="{{ $companyInfo?->name }}" name="name">
                                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="font-sm color-text-mutted mb-10">Company Bio *</label>
-                                            <textarea  class="{{ $errors->has('bio') ? 'is-invalid ':'' }}" name="bio"></textarea>
+                                            <textarea  class="{{ $errors->has('bio') ? 'is-invalid ':'' }}" name="bio">{{ $companyInfo?->bio }}</textarea>
                                             <x-input-error :messages="$errors->get('bio')" class="mt-2" />
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="font-sm color-text-mutted mb-10">Company Vision *</label>
-                                            <textarea class="{{ $errors->has('vision') ? 'is-invalid ':'' }}" name="vision"></textarea>
+                                            <textarea class="{{ $errors->has('vision') ? 'is-invalid ':'' }}" name="vision">{{ $companyInfo?->vision }}</textarea>
                                             <x-input-error :messages="$errors->get('vision')" class="mt-2" />
                                         </div>
                                     </div>

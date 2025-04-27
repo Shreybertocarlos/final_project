@@ -13,7 +13,8 @@ class CompanyProfileController extends Controller
 {
     use FileUploadTrait;
     function index() : View{
-        return view('frontend.company-dashboard.profile.index');
+        $companyInfo = Company::where('user_id', auth()->user()->id)->first();
+        return view('frontend.company-dashboard.profile.index',compact('companyInfo'));
     }
     //
 
