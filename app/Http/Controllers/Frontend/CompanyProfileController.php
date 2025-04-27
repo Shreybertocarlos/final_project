@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\CompanyFoundingInfoUpdateRequest;
 use App\Http\Requests\Frontend\CompanyInfoUpdateRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
@@ -42,7 +43,7 @@ class CompanyProfileController extends Controller
 
     }
 
-    function updateFoundingInfo(Request $request) :RedirectResponse {
+    function updateFoundingInfo(CompanyFoundingInfoUpdateRequest $request) :RedirectResponse {
         dd($request->all());
 
         return redirect()->back();
