@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\IndustryTypeController;
+use App\Http\Controllers\Admin\OrganizationTypeController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['guest:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
@@ -43,4 +44,6 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
     Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
     /*industry route*/
     Route::resource('industry-types', IndustryTypeController::class);
+ /** Organization Type Route */
+    Route::resource('organization-types', OrganizationTypeController::class);
 });

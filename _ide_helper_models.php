@@ -140,6 +140,19 @@ namespace App\Models{
 /**
  * 
  *
+ * @method static \Illuminate\Database\Eloquent\Builder|OrganizationType findSimilarSlugs(string $attribute, array $config, string $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrganizationType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OrganizationType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OrganizationType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|OrganizationType withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
+ */
+	class OrganizationType extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
  * @property int $id
  * @property string $name
  * @property string $email
