@@ -55,7 +55,7 @@
                     <div class="card-footer text-right">
                     <nav class="d-inline-block">
                         @if ($industryTypes->hasPages())
-                            {{ $industryTypes->links() }}
+                        {{ $industryTypes->withQueryString()->links() }}
                         @endif
                     </nav>
                       </div>

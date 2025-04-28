@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\IndustryType;
 use App\Services\Notify ;
+use App\Traits\Searchable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -13,16 +14,21 @@ use Illuminate\View\View;
 
 class IndustryTypeController extends Controller
 {
+    use Searchable;
     /**
      * Display a listing of the resource.
      */
-    public function index():View
-    {
-        $industryTypes = IndustryType::paginate(20);
 
-        return view('admin.industry-type.index',compact('industryTypes'));
-        //
+    public function index(Request $request) : View
+    {
+
+        $query = IndustryType::query();
+        $this->search($query, ['name']);
+        $industryTypes = $query->paginate(20);
+
+        return view('admin.industry-type.index', compact('industryTypes'));
     }
+
 
     /**
      * Show the form for creating a new resource.
