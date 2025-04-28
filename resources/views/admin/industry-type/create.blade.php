@@ -19,7 +19,7 @@
                             <div class="form-group">
                                 <label for="">Name</label>
                                 <input type="text" class="form-control " name="name" >
-                                {{-- <x-input-error :messages="$errors->get('name')" class="mt-2" /> --}}
+                                <x-input-error :messages="$errors->get('name')" class="mt-2" />
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Create</button>

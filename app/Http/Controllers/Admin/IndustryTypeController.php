@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\IndustryType;
+use App\Services\Notify ;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+
 
 class IndustryTypeController extends Controller
 {
@@ -39,6 +41,8 @@ class IndustryTypeController extends Controller
         $type = new IndustryType();
         $type->name = $request->name;
         $type->save();
+
+        Notify::createdNotification();
 
         return to_route('admin.industry-types.index');
         //
