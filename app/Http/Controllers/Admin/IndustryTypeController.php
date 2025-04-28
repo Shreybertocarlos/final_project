@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\IndustryType;
 use App\Services\Notify ;
 use Illuminate\Http\RedirectResponse;
@@ -88,6 +89,20 @@ class IndustryTypeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $company = Company::where('industry_type_id', $id)->exists();
+
+        if($company) {
+            return response(['message' => 'This item is already been used can\'t delete!'], 500);
+        }
+
+        try {
+            IndustryType::findOrFail($id)->delete();
+            Notify::deletedNotification();
+            return response(['message' => 'success'], 200);
+
+        }catch(\Exception $e) {
+            logger($e);
+            return response(['message' => 'Something Went Wrong Please Try Again!'], 500);
+        }
     }
 }

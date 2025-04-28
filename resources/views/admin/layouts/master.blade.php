@@ -78,12 +78,31 @@
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        swal('Poof! Deleted',{
-                            icon: 'success',
+                        let url = $(this).attr('href')
+
+                        console.log(url);
+
+                        $.ajax({
+                            method: 'DELETE',
+                            url: url,
+                            data: {_token: "{{ csrf_token() }}"},
+                            success: function(response) {
+                                window.location.reload();
+                            },
+                            error: function(xhr, status, error) {
+                                console.log(xhr);
+
+                                swal(xhr.responseJSON.message, {
+                                    icon: 'error',
+                                });
+                             
+                            }
                         });
-                    }else{
-                        swal('your imaginary file is safe');
+
+
                     }
+
+
 
 
         });
