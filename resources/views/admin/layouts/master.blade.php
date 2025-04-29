@@ -13,6 +13,7 @@
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/summernote/summernote-bs4.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/assets/modules/select2/dist/css/select2.min.css') }}">
     <!--Laravel Notify Start-->
     <x:notify::notify />
     <!--Laravel Notify End-->
@@ -56,8 +57,10 @@
     <script src="{{ asset('admin/assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
+
     <script src="{{ asset('admin/assets/modules/summernote/summernote-bs4.js') }}"></script>
     <script src="{{ asset('admin/assets/modules/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
     <!-- Template JS File -->
 
     <script src="{{ asset('admin/assets/js/scripts.js') }}"></script>
@@ -95,7 +98,7 @@
                                 swal(xhr.responseJSON.message, {
                                     icon: 'error',
                                 });
-                             
+
                             }
                         });
 
