@@ -65,6 +65,7 @@
 
     <script src="{{ asset('admin/assets/js/scripts.js') }}"></script>
     <script src="{{ asset('admin/assets/js/custom.js') }}"></script>
+    @stack('scripts')
 
     <script>
 
