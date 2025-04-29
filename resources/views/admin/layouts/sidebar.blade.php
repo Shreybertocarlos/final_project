@@ -111,7 +111,7 @@
                     <span>Attributes</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{ route('admin.industry-types.index') }}">Industry Type</a></li>
-                    <li><a class="nav-link" href="{{ route('admin.organization-types.index') }}">Orginization Type</a></li>
+                    <li><a class="nav-link" href="{{ route('admin.organization-types.index') }}">Organization Type</a></li>
 
                 </ul>
             </li>
@@ -121,6 +121,7 @@
                     <span>Locations</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{ route('admin.countries.index') }}">Countries</a></li>
+                    <li><a class="nav-link" href="{{ route('admin.states.index') }}">States</a></li>
 
                 </ul>
             </li>
