@@ -90,6 +90,7 @@
     @notifyJs
 
     <script src="{{ asset('frontend/assets/js/main.js?v=4.1') }}"></script>
+    @stack('scripts')
 
     <script>
         $('.datepicker').datepicker({
