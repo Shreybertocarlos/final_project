@@ -44,5 +44,11 @@ class CandidateProfileController extends Controller
         // return view('frontend.candidate-dashboard.profile.index', compact('candidate', 'experiences', 'professions', 'skills', 'languages', 'candidateExperiences', 'candidateEducation', 'countries', 'states', 'cities'));
         return view('frontend.candidate-dashboard.profile.index');
     }
-    //
+    /** update basic info of candidate profile**/
+    function basicInfoUpdate(CandidateBasicProfileUpdateRequest $request):RedirectResponse{
+        return redirect()->back();
+    }
+
+
+
 }

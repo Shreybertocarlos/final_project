@@ -1,5 +1,5 @@
 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-    {{-- <form action="{{ route('candidate.profile.basic-info.update') }}" method="POST" enctype="multipart/form-data"> --}}
+    <form action="{{ route('candidate.profile.basic-info.update') }}" method="POST" enctype="multipart/form-data">
     <form >
         @csrf
         <div class="row">

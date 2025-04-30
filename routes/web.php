@@ -45,6 +45,9 @@ Route::group(
 
         Route::get('/dashboard', [CandidateDashboardController::class, 'index'])->name('dashboard');
         Route::get('/profile', [CandidateProfileController::class, 'index'])->name('profile.index');
+        Route::post('/profile/basic-info-update', [CandidateProfileController::class, 'basicInfoUpdate'])->name('profile.basic-info.update');
+        Route::post('/profile/profile-info-update', [CandidateProfileController::class, 'profileInfoUpdate'])->name('profile.profile-info.update');
+
     }
 );
 /* Company Routes */
