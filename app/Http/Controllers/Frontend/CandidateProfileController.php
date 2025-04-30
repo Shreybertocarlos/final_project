@@ -28,12 +28,15 @@ use Illuminate\Validation\Rules;
 
 class CandidateProfileController extends Controller
 {
+    use FileUploadTrait;
+
     function index() : View {
         // $candidate = Candidate::with(['skills'])->where('user_id', auth()->user()->id)->first();
+        $candidate = Candidate::where('user_id', auth()->user()->id)->first();
         // $candidateExperiences = CandidateExperience::where('candidate_id', $candidate?->id)->orderBy('id', 'DESC')->get();
         // $candidateEducation = CandidateEducation::where('candidate_id', $candidate?->id)->orderBy('id', 'DESC')->get();
 
-        // $experiences = Experience::all();
+        $experiences = Experience::all();
         // $professions = Profession::all();
         // $skills = Skill::all();
         // $languages = Language::all();
@@ -42,10 +45,35 @@ class CandidateProfileController extends Controller
         // $cities = City::where('state_id', $candidate?->state)->get();
 
         // return view('frontend.candidate-dashboard.profile.index', compact('candidate', 'experiences', 'professions', 'skills', 'languages', 'candidateExperiences', 'candidateEducation', 'countries', 'states', 'cities'));
-        return view('frontend.candidate-dashboard.profile.index');
+        return view('frontend.candidate-dashboard.profile.index',compact('candidate','experiences'));
     }
-    /** update basic info of candidate profile**/
-    function basicInfoUpdate(CandidateBasicProfileUpdateRequest $request):RedirectResponse{
+     /** update basic info of candidate profile */
+     function basicInfoUpdate(CandidateBasicProfileUpdateRequest $request) : RedirectResponse {
+        // handle files
+        $imagePath = $this->uploadFile($request, 'profile_picture');
+        $cvPath = $this->uploadFile($request, 'cv');
+
+        $data = [];
+        if(!empty($imagePath)) $data['image'] = $imagePath;
+        if(!empty($cvPath)) $data['cv'] = $cvPath;
+
+        $data['full_name'] = $request->full_name;
+        $data['title'] = $request->title;
+        $data['experience_id'] = $request->experience_level;
+        $data['website'] = $request->website;
+        $data['birth_date'] = $request->date_of_birth;
+
+        // updating data
+        Candidate::updateOrCreate(
+            ['user_id' => auth()->user()->id],
+            $data
+
+        );
+
+        // $this->updateProfileStatus();
+
+        Notify::updatedNotification();
+
         return redirect()->back();
     }
 
