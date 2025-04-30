@@ -232,13 +232,36 @@ namespace App\Models{
 /**
  * 
  *
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Profession findSimilarSlugs(string $attribute, array $config, string $slug)
  * @method static \Illuminate\Database\Eloquent\Builder|Profession newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Profession newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Profession query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Profession withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
  */
 	class Profession extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill findSimilarSlugs(string $attribute, array $config, string $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
+ */
+	class Skill extends \Eloquent {}
 }
 
 namespace App\Models{
