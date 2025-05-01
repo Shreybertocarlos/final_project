@@ -31,21 +31,21 @@ class CandidateProfileController extends Controller
     use FileUploadTrait;
 
     function index() : View {
-        // $candidate = Candidate::with(['skills'])->where('user_id', auth()->user()->id)->first();
+        $candidate = Candidate::with(['skills'])->where('user_id', auth()->user()->id)->first();
         $candidate = Candidate::where('user_id', auth()->user()->id)->first();
         // $candidateExperiences = CandidateExperience::where('candidate_id', $candidate?->id)->orderBy('id', 'DESC')->get();
         // $candidateEducation = CandidateEducation::where('candidate_id', $candidate?->id)->orderBy('id', 'DESC')->get();
 
         $experiences = Experience::all();
-        // $professions = Profession::all();
-        // $skills = Skill::all();
-        // $languages = Language::all();
+        $professions = Profession::all();
+        $skills = Skill::all();
+        $languages = Language::all();
         // $countries = Country::all();
         // $states = State::where('country_id', $candidate?->country)->get();
         // $cities = City::where('state_id', $candidate?->state)->get();
 
         // return view('frontend.candidate-dashboard.profile.index', compact('candidate', 'experiences', 'professions', 'skills', 'languages', 'candidateExperiences', 'candidateEducation', 'countries', 'states', 'cities'));
-        return view('frontend.candidate-dashboard.profile.index',compact('candidate','experiences'));
+        return view('frontend.candidate-dashboard.profile.index',compact('candidate','experiences', 'professions', 'skills', 'languages'));
     }
      /** update basic info of candidate profile */
      function basicInfoUpdate(CandidateBasicProfileUpdateRequest $request) : RedirectResponse {
@@ -69,6 +69,45 @@ class CandidateProfileController extends Controller
             $data
 
         );
+
+        // $this->updateProfileStatus();
+
+        Notify::updatedNotification();
+
+        return redirect()->back();
+    }
+    function profileInfoUpdate(CandidateProfileInfoUpdateRequest $request) : RedirectResponse {
+
+        $data = [];
+        $data['gender'] = $request->gender;
+        $data['marital_status'] = $request->marital_status;
+        $data['profession_id'] = $request->profession;
+        $data['status'] = $request->availability;
+        $data['bio'] = $request->biography;
+
+         // updating data
+        Candidate::updateOrCreate(
+            ['user_id' => auth()->user()->id],
+            $data
+        );
+
+        $candidate = Candidate::where('user_id', auth()->user()->id)->first();
+
+        CandidateLanguage::where('candidate_id', $candidate->id)?->delete();
+        foreach($request->language_you_know as $language) {
+            $candidateLang = new CandidateLanguage();
+            $candidateLang->candidate_id = $candidate->id;
+            $candidateLang->language_id = $language;
+            $candidateLang->save();
+        }
+
+        CandidateSkill::where('candidate_id', $candidate->id)?->delete();
+        foreach($request->skill_you_have as $skill) {
+            $candidateSkill = new CandidateSkill();
+            $candidateSkill->candidate_id = $candidate->id;
+            $candidateSkill->skill_id = $skill;
+            $candidateSkill->save();
+        }
 
         // $this->updateProfileStatus();
 

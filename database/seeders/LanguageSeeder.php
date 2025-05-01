@@ -13,7 +13,7 @@ class LanguageSeeder extends Seeder
      */
     public function run(): void
     {
-        $languages = ['English', 'Hindi', 'Arabic', 'Bangla','Spanish','German', 'Other'];
+        $languages = ['English','Nepali', 'Hindi', 'Arabic', 'Bangla','Spanish','German','Other'];
 
         foreach($languages as $language) {
             $lang = new Language();

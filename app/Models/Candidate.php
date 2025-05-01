@@ -27,13 +27,13 @@ class Candidate extends Model
         ];
     }
 
-    // function skills() : HasMany {
-    //     return $this->hasMany(CandidateSkill::class, 'candidate_id', 'id');
-    // }
+    function skills() : HasMany {
+        return $this->hasMany(CandidateSkill::class, 'candidate_id', 'id');
+    }
 
-    // function languages() : HasMany {
-    //     return $this->hasMany(CandidateLanguage::class, 'candidate_id', 'id');
-    // }
+    function languages() : HasMany {
+        return $this->hasMany(CandidateLanguage::class, 'candidate_id', 'id');
+    }
 
     // function experience() : BelongsTo {
     //     return $this->belongsTo(Experience::class, 'experience_id', 'id');
