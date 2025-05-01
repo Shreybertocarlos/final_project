@@ -61,7 +61,7 @@
                 </tr>
             </thead>
             <tbody class="education-tbody">
-                {{-- @forelse ($candidateEducation as $education)
+                @forelse ($candidateEducation as $education)
                 <tr>
                     <td>{{ $education->level }}</td>
                     <td>{{ $education->degree }}</td>
@@ -77,7 +77,7 @@
                 <tr>
                     <td colspan="5" class="text-center">No Data Found</td>
                 </tr>
-            @endforelse --}}
+            @endforelse
 
 
             </tbody>
