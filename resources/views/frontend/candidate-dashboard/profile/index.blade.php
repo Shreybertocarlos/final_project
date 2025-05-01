@@ -6,16 +6,17 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-12">
-                        <h2 class="mb-20">Company Profile</h2>
+                        <h2 class="mb-20">My Profile</h2>
                         <ul class="breadcrumbs">
                             <li><a class="home-icon" href="index.html">Home</a></li>
-                            <li>Company Profile</li>
+                            <li>My Profile</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     <section class="section-box mt-120">
         <div class="container">
             <div class="row">
@@ -39,15 +40,20 @@
                                 aria-selected="false">Experience & Education</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
-                                data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                            <button class="nav-link" id="pills-account-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-account" type="button" role="tab" aria-controls="pills-account"
                                 aria-selected="false">Account Settings</button>
                         </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
                         @include('frontend.candidate-dashboard.profile.sections.basic-section')
+
                         @include('frontend.candidate-dashboard.profile.sections.profile-section')
+
                         @include('frontend.candidate-dashboard.profile.sections.experience-section')
+
+                        {{-- @include('frontend.candidate-dashboard.profile.sections.account-section') --}}
+
 
 
                         {{-- <div class="tab-pane fade" id="pills-contact" role="tabpanel"
@@ -120,53 +126,277 @@
             </div>
         </div>
     </section>
+        <!-- Experience Modal -->
+        <div class="modal fade" id="experienceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Experience</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <form action="" id="ExperienceForm">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Company *</label>
+                                <input type="text" class="from-control" required="" name="company" id="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Department *</label>
+                                <input type="text" class="from-control" required="" name="department" id="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Designation *</label>
+                                <input type="text" class="from-control" required="" name="designation" id="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Start Date *</label>
+                                <input type="text" class="from-control datepicker" required="" name="start" id="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">End Date *</label>
+                                <input type="text" class="from-control datepicker" required="" name="end" id="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-check form-group form-check-inline">
+                                <input class="form-check-input" style="margin-right: 10px" value="1" type="checkbox" name="currently_working">
+                                <label class="form-check-label" for="typeCandidate"> I am currently working</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Responsibilities</label>
+                                <textarea name="responsibilities" maxlength="500" id="" class="from-control" ></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Experience</button>
+                    </div>
+                </form>
+                </div>
+
+            </div>
+            </div>
+        </div>
+
+            <!-- Education Modal -->
+            <div class="modal fade" id="educationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Education</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    <form action="" id="EducationForm">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Level *</label>
+                                    <input type="text" class="from-control" required="" name="level" id="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Degree *</label>
+                                    <input type="text" class="from-control" required="" name="degree" id="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Year *</label>
+                                    <input type="text" class="from-control yearpicker" required="" name="year" id="">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Note</label>
+                                    <textarea name="note" maxlength="500" id="" class="from-control" ></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save Eduction</button>
+                        </div>
+                    </form>
+                    </div>
+
+                </div>
+                </div>
+            </div>
 @endsection
 
 @push('scripts')
 <script>
-    $(document).ready(function() {
-        $('.country').on('change', function() {
-            let country_id = $(this).val();
-            // remove all previous cities
-            $('.city').html("");
 
+
+        var editId = "";
+        var editMode = false;
+
+        // fetch experience
+        function fetchExperience() {
             $.ajax({
-                mehtod: 'GET',
-                url: '{{ route("get-states", ":id") }}'.replace(":id", country_id),
+                method: 'GET',
+                url: "{{ route('candidate.experience.index') }}",
                 data: {},
                 success: function(response) {
-                    let html = '';
+                    $('.experience-tbody').html(response);
+                },
+                error: function(xhr, status, error) {
+
+                }
+            })
+        }
+
+        // Save experience data
+        $('#ExperienceForm').on('submit', function(event) {
+            event.preventDefault();
+            const formData = $(this).serialize();
+
+            if(editMode){
+                $.ajax({
+                    method: 'PUT',
+                    url: "{{ route('candidate.experience.update', ':id') }}".replace(':id', editId),
+                    data: formData,
+                    beforeSend: function() {
+                        showLoader();
+                    },
+                    success: function(response) {
+                        fetchExperience()
+
+                        $('#ExperienceForm').trigger("reset");
+                        $('#experienceModal').modal('hide');
+                        editId = "";
+                        editMode = false;
+
+                        hideLoader();
+                        notyf.success(response.message);
+                    },
+                    error: function(xhr, status, error) {
+                        hideLoader();
+                        console.log(error)
+                    }
+
+                })
+            }else {
+                $.ajax({
+                    method: 'POST',
+                    url: "{{ route('candidate.experience.store') }}",
+                    data: formData,
+                    beforeSend: function() {
+                        showLoader();
+                    },
+                    success: function(response) {
+                        fetchExperience();
+                        $('#ExperienceForm').trigger("reset");
+                        $('#experienceModal').modal('hide');
+
+                        hideLoader();
+                        notyf.success(response.message);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                        hideLoader();
+                    }
+                })
+            }
+
+        });
+
+        $('body').on('click', '.edit-experience', function(){
+            $('#ExperienceForm').trigger("reset");
+
+            let url = $(this).attr('href');
+
+            $.ajax({
+                method: 'GET',
+                url: url,
+                data: {},
+                beforeSend: function() {
+                    showLoader();
+                },
+                success: function(response) {
+                    editId = response.id
+                    editMode = true;
 
                     $.each(response, function(index, value) {
-                        html += `<option value="${value.id}" >${value.name}</option>`
-                    });
-
-                    $('.state').html(html);
+                        $(`input[name="${index}"]:text`).val(value);
+                        if(index === 'currently_working' && value == 1) {
+                            $(`input[name="${index}"]:checkbox`).prop('checked', true);
+                        }
+                        if(index === 'responsibilities') {
+                            $(`textarea[name="${index}"]`).val(value);
+                        }
+                    })
+                    hideLoader();
                 },
-                error: function(xhr, status, error) {}
+                error: function(xhr, status, error) {
+                    console.log(error);
+                    hideLoader();
+                }
             })
         })
 
-        // get cities
-        $('.state').on('change', function() {
-            let state_id = $(this).val();
+        // Delete experience item
+        $("body").on('click', '.delete-experience', function(e) {
+            e.preventDefault();
 
-            $.ajax({
-                mehtod: 'GET',
-                url: '{{ route("get-cities", ":id") }}'.replace(":id", state_id),
-                data: {},
-                success: function(response) {
-                    let html = '';
+                let url = $(this).attr('href');
 
-                    $.each(response, function(index, value) {
-                        html += `<option value="${value.id}" >${value.name}</option>`
-                    });
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
 
-                    $('.city').html(html);
-                },
-                error: function(xhr, status, error) {}
-            })
-        })
-    })
+                        $.ajax({
+                            method: 'DELETE',
+                            url: url,
+                            data: {_token: "{{ csrf_token() }}"},
+                            beforeSend: function() {
+                                showLoader();
+                            },
+                            success: function(response) {
+                                fetchExperience();
+                                // hideLoader();
+                                notyf.success(response.message);
+                            },
+                            error: function(xhr, status, error) {
+                                console.log(xhr);
+                                swal(xhr.responseJSON.message, {
+                                    icon: 'error',
+                                });
+                                hideLoader();
+
+                            }
+                        })
+                    }
+                });
+        });
+
+
+
 </script>
 @endpush

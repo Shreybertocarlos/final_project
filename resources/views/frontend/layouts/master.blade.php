@@ -12,61 +12,42 @@
     <meta name="description" content="Index page">
     <meta name="keywords" content="index, page">
     <meta name="author" content="">
-    <link rel="shortcut icon" type="image/x-icon" href="">
-    @notifyCss
+    <link rel="shortcut icon" type="image/x-icon" href="{{ config('settings.site_favicon') }}">
+
+
+
     <link href="{{ asset('frontend/assets/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/assets/css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <link rel="stylesheet" href="{{ asset('admin/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
 
-
-
-
-    <title>Candidate Recruitment Platform </title>
+    <title>{{ config('settings.site_name') }} </title>
 </head>
 
 <body>
-
-
-
-    {{-- <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="text-center"><img src="{{ asset('frontend/assets/imgs/template/loading.gif') }}"
-                        alt="joblist"></div>
-            </div>
+    <div class="preloader_demo d-none">
+        <div class="img">
+          <img src="{{ asset('frontend/assets/imgs/template/loading.gif') }}" alt="joblist">
         </div>
-    </div> --}}
+    </div>
+
+    <div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+      <div class="preloader-inner position-relative">
+        <div class="text-center"><img src="{{ asset('frontend/assets/imgs/template/loading.gif') }}" alt="joblist"></div>
+      </div>
+    </div>
+  </div>
+
     @include('frontend.layouts.header')
 
-
-
     <main class="main">
+
         @yield('contents')
 
     </main>
 
-    <section class="section-box subscription_box">
-        <div class="container">
-            <div class="box-newsletter">
-                <div class="newsletter_textarea">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <h2 class="text-md-newsletter">Subscribe our newsletter</h2>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="box-form-newsletter">
-                                <form class="form-newsletter">
-                                    <input class="input-newsletter" type="text" value=""
-                                        placeholder="Enter your email here">
-                                    <button class="btn btn-default font-heading">Subscribe</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     @include('frontend.layouts.footer')
 
@@ -84,35 +65,20 @@
     <script src="{{ asset('frontend/assets/js/plugins/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/plugins/Font-Awesome.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/plugins/counterup.js') }}"></script>
+    <script src="{{ asset('admin/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/noUISlider.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/slider.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
-
-    <!--Laravel Notify Start-->
-    <x:notify::notify />
-    <!--Laravel Notify End-->
-    @notifyJs
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/goodshare.js@6/goodshare.min.js"></script>
 
     <script src="{{ asset('frontend/assets/js/main.js?v=4.1') }}"></script>
+
     @stack('scripts')
 
-    <script>
-        $('.datepicker').datepicker({
-
-    format: 'yyyy-m-d',
-
-
-        });
-
-        ClassicEditor
-        .create(document.querySelector('#editor'))
-        .catch(error => {
-            console.error(error);
-        });
-    </script>
-
-
-
-
+    @include('frontend.layouts.scripts')
 </body>
 
 </html>

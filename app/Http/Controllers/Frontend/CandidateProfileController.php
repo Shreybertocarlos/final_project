@@ -32,8 +32,9 @@ class CandidateProfileController extends Controller
 
     function index() : View {
         $candidate = Candidate::with(['skills'])->where('user_id', auth()->user()->id)->first();
+
         $candidate = Candidate::where('user_id', auth()->user()->id)->first();
-        // $candidateExperiences = CandidateExperience::where('candidate_id', $candidate?->id)->orderBy('id', 'DESC')->get();
+        $candidateExperiences = CandidateExperience::where('candidate_id', $candidate?->id)->orderBy('id', 'DESC')->get();
         // $candidateEducation = CandidateEducation::where('candidate_id', $candidate?->id)->orderBy('id', 'DESC')->get();
 
         $experiences = Experience::all();
@@ -45,7 +46,7 @@ class CandidateProfileController extends Controller
         // $cities = City::where('state_id', $candidate?->state)->get();
 
         // return view('frontend.candidate-dashboard.profile.index', compact('candidate', 'experiences', 'professions', 'skills', 'languages', 'candidateExperiences', 'candidateEducation', 'countries', 'states', 'cities'));
-        return view('frontend.candidate-dashboard.profile.index',compact('candidate','experiences', 'professions', 'skills', 'languages'));
+        return view('frontend.candidate-dashboard.profile.index',compact('candidate','experiences', 'professions', 'skills', 'languages', 'candidateExperiences'));
     }
      /** update basic info of candidate profile */
      function basicInfoUpdate(CandidateBasicProfileUpdateRequest $request) : RedirectResponse {

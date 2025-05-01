@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody class="experience-tbody">
-                {{-- @forelse ($candidateExperiences as $experience)
+                @forelse ($candidateExperiences as $experience)
                 <tr>
                     <td>{{ $experience->company }}</td>
                     <td>{{ $experience->department }}</td>
@@ -34,21 +34,8 @@
                 <tr>
                     <td colspan="5" class="text-center">No Data Found</td>
                 </tr>
-            @endforelse --}}
+            @endforelse
 
-            {{-- //for now --}}
-            <tr>
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
-                <td>
-                    <a href="" class="btn-sm btn btn-primary edit-experience" data-bs-toggle="modal"
-                        data-bs-target="#experienceModal"><i class="fas fa-edit"></i></a>
-                    <a href="" class="btn-sm btn btn-danger delete-experience"><i class="fas fa-trash-alt"></i></a>
-
-                </td>
-            </tr>
 
 
 
@@ -61,7 +48,7 @@
         <div class="d-flex justify-content-between">
             <h4>Education</h4>
             <button class="btn btn-primary" onclick="$('#EducationForm').trigger('reset'); editId = ''; editMode=false"
-                data-bs-toggle="modal" data-bs-target="#educationModal">Add Eduction</button>
+                data-bs-toggle="modal" data-bs-target="#educationModal">Add Education</button>
         </div>
         <br>
         <table class="table table-striped">

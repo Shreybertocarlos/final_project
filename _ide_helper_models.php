@@ -121,6 +121,17 @@ namespace App\Models{
 /**
  * 
  *
+ * @method static \Illuminate\Database\Eloquent\Builder|CandidateExperience newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CandidateExperience newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CandidateExperience query()
+ */
+	class CandidateExperience extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
  * @property int $id
  * @property int $candidate_id
  * @property int $language_id
@@ -484,6 +495,7 @@ namespace App\Models{
  * @mixin \Eloquent
  * @property string $image
  * @property string $role
+ * @property-read \App\Models\Candidate|null $candidateProfile
  * @method static \Illuminate\Database\Eloquent\Builder|User whereImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRole($value)
  */
