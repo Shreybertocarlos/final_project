@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>General Dashboard &mdash; Stisla</title>
-    @notifyCss
+
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -14,10 +14,6 @@
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/summernote/summernote-bs4.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/select2/dist/css/select2.min.css') }}">
-    <!--Laravel Notify Start-->
-    <x:notify::notify />
-    <!--Laravel Notify End-->
-    @notifyJs
 
 
     <!-- Template CSS -->
@@ -68,6 +64,11 @@
     @stack('scripts')
 
     <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
 
 
         $(".delete-item").on('click', function(e) {
@@ -89,7 +90,9 @@
                         $.ajax({
                             method: 'DELETE',
                             url: url,
-                            data: {_token: "{{ csrf_token() }}"},
+                            data: {
+                                _token: "{{ csrf_token() }}"
+                            },
                             success: function(response) {
                                 window.location.reload();
                             },
@@ -109,10 +112,9 @@
 
 
 
-        });
-
                 });
 
+        });
     </script>
 
 </body>

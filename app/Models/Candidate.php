@@ -35,17 +35,17 @@ class Candidate extends Model
         return $this->hasMany(CandidateLanguage::class, 'candidate_id', 'id');
     }
 
-    // function experience() : BelongsTo {
-    //     return $this->belongsTo(Experience::class, 'experience_id', 'id');
-    // }
+    function experience() : BelongsTo {
+        return $this->belongsTo(Experience::class, 'experience_id', 'id');
+    }
 
-    // function experiences() : HasMany {
-    //     return $this->hasMany(CandidateExperience::class, 'candidate_id', 'id')->orderBy('id', 'Desc');
-    // }
+    function experiences() : HasMany {
+        return $this->hasMany(CandidateExperience::class, 'candidate_id', 'id')->orderBy('id', 'Desc');
+    }
 
-    // function educations() : HasMany {
-    //     return $this->hasMany(CandidateEducation::class, 'candidate_id', 'id')->orderBy('id', 'Desc');
-    // }
+    function educations() : HasMany {
+        return $this->hasMany(CandidateEducation::class, 'candidate_id', 'id')->orderBy('id', 'Desc');
+    }
 
     function profession() : BelongsTo {
         return $this->belongsTo(Profession::class, 'profession_id', 'id');

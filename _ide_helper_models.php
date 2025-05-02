@@ -77,6 +77,11 @@ namespace App\Models{
  * @property-read \App\Models\City|null $candidateCity
  * @property-read \App\Models\Country|null $candidateCountry
  * @property-read \App\Models\State|null $candidateState
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CandidateEducation> $educations
+ * @property-read int|null $educations_count
+ * @property-read \App\Models\Experience|null $experience
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CandidateExperience> $experiences
+ * @property-read int|null $experiences_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CandidateLanguage> $languages
  * @property-read int|null $languages_count
  * @property-read \App\Models\Profession|null $profession
