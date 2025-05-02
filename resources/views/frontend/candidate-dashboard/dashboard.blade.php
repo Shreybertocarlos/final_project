@@ -47,21 +47,22 @@
                   </div>
                 </div>
               </div>
+              @if (!isCandidateProfileComplete())
               <div class="row">
-                <div class="col-12 mt-30">
-                  <div class="dash_alert_box p-30 bg-danger rounded-4 d-flex flex-wrap">
-                    <span class="img">
-                      <img src="assets/imgs/avatar/ava_17.png" alt="alert">
-                    </span>
-                    <div class="text">
-                      <h4>This is demo heading</h4>
-                      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem aliquam quasi deleniti nesciunt
-                        obcaecati labore, magnam suscipit repudiandae corrupti laborum.</p>
-                    </div>
-                    <a href="#" class="btn btn-default rounded-1">Edit Profile</a>
+                  <div class="col-12 mt-30">
+                      <div class="dash_alert_box p-30 bg-danger rounded-4 d-flex flex-wrap">
+                          <span class="img">
+                              <img src="{{ asset(auth()->user()->image) }}" alt="alert">
+                          </span>
+                          <div class="text">
+                              <h4>Please setup your Profile First</h4>
+                              <p>You can not access all the features of the website if you don't setup your account first make sure you setup your <b style="font-weight: bold;">"Basic", "Profile" and "Account Seeting"</b> Data.</p>
+                          </div>
+                          <a href="{{ route('candidate.profile.index') }}" class="btn btn-default rounded-1">Edit Profile</a>
+                      </div>
                   </div>
-                </div>
               </div>
+          @endif
             </div>
           </div>
         </div>

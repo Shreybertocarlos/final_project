@@ -32,8 +32,6 @@ class CandidateProfileController extends Controller
 
     function index() : View {
         $candidate = Candidate::with(['skills'])->where('user_id', auth()->user()->id)->first();
-
-        $candidate = Candidate::where('user_id', auth()->user()->id)->first();
         $candidateExperiences = CandidateExperience::where('candidate_id', $candidate?->id)->orderBy('id', 'DESC')->get();
         $candidateEducation = CandidateEducation::where('candidate_id', $candidate?->id)->orderBy('id', 'DESC')->get();
 
@@ -46,10 +44,10 @@ class CandidateProfileController extends Controller
         $cities = City::where('state_id', $candidate?->state)->get();
 
         return view('frontend.candidate-dashboard.profile.index', compact('candidate', 'experiences', 'professions', 'skills', 'languages', 'candidateExperiences', 'candidateEducation', 'countries', 'states', 'cities'));
-
     }
-     /** update basic info of candidate profile */
-     function basicInfoUpdate(CandidateBasicProfileUpdateRequest $request) : RedirectResponse {
+
+    /** update basic info of candidate profile */
+    function basicInfoUpdate(CandidateBasicProfileUpdateRequest $request) : RedirectResponse {
         // handle files
         $imagePath = $this->uploadFile($request, 'profile_picture');
         $cvPath = $this->uploadFile($request, 'cv');
@@ -57,7 +55,6 @@ class CandidateProfileController extends Controller
         $data = [];
         if(!empty($imagePath)) $data['image'] = $imagePath;
         if(!empty($cvPath)) $data['cv'] = $cvPath;
-
         $data['full_name'] = $request->full_name;
         $data['title'] = $request->title;
         $data['experience_id'] = $request->experience_level;
@@ -68,15 +65,15 @@ class CandidateProfileController extends Controller
         Candidate::updateOrCreate(
             ['user_id' => auth()->user()->id],
             $data
-
         );
 
-        // $this->updateProfileStatus();
+        $this->updateProfileStatus();
 
         Notify::updatedNotification();
 
         return redirect()->back();
     }
+
     function profileInfoUpdate(CandidateProfileInfoUpdateRequest $request) : RedirectResponse {
 
         $data = [];
@@ -110,7 +107,7 @@ class CandidateProfileController extends Controller
             $candidateSkill->save();
         }
 
-        // $this->updateProfileStatus();
+        $this->updateProfileStatus();
 
         Notify::updatedNotification();
 
@@ -132,7 +129,7 @@ class CandidateProfileController extends Controller
             ]
         );
 
-        // $this->updateProfileStatus();
+        $this->updateProfileStatus();
 
         Notify::updatedNotification();
 
@@ -164,15 +161,12 @@ class CandidateProfileController extends Controller
     }
 
     // update profile complete status
-    // function updateProfileStatus() : void {
-    //     if(isCandidateProfileComplete()) {
-    //         $candidate = Candidate::where('user_id', auth()->user()->id)->first();
-    //         $candidate->profile_complete = 1;
-    //         $candidate->visibility = 1;
-    //         $candidate->save();
-    //     }
-    // }
-
-
-
+    function updateProfileStatus() : void {
+        if(isCandidateProfileComplete()) {
+            $candidate = Candidate::where('user_id', auth()->user()->id)->first();
+            $candidate->profile_complete = 1;
+            $candidate->visibility = 1;
+            $candidate->save();
+        }
+    }
 }
