@@ -52,7 +52,7 @@
 
                         @include('frontend.candidate-dashboard.profile.sections.experience-section')
 
-                        {{-- @include('frontend.candidate-dashboard.profile.sections.account-section') --}}
+                        @include('frontend.candidate-dashboard.profile.sections.account-section')
 
 
 

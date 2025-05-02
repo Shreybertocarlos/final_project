@@ -117,6 +117,62 @@ class CandidateProfileController extends Controller
         return redirect()->back();
     }
 
+    // Account Info Update
+    function AccountInfoUpdate(CandidateAccountInfoUpdateRequest $request) : RedirectResponse {
+        Candidate::updateOrCreate(
+            ['user_id' => auth()->user()->id],
+            [
+                'country' => $request->country,
+                'state' => $request->state,
+                'city' => $request->city,
+                'address' => $request->address,
+                'phone_one' => $request->phone,
+                'phone_two' => $request->secondary_phone,
+                'email' => $request->email,
+            ]
+        );
+
+        // $this->updateProfileStatus();
+
+        Notify::updatedNotification();
+
+        return redirect()->back();
+    }
+
+    // Account Email Update
+    function AccountEmailUpdate(Request $request) : RedirectResponse {
+        $request->validate([
+            'account_email' => ['required', 'email']
+        ]);
+
+        Auth::user()->update(['email' => $request->account_email]);
+        Notify::updatedNotification();
+
+        return redirect()->back();
+    }
+
+    // Account Password Update
+    function AccountPasswordUpdate(Request $request) : RedirectResponse {
+        $request->validate([
+            'password' => ['required', 'confirmed', Rules\Password::defaults()]
+        ]);
+
+        Auth::user()->update(['password' => bcrypt($request->password)]);
+        Notify::updatedNotification();
+
+        return redirect()->back();
+    }
+
+    // update profile complete status
+    // function updateProfileStatus() : void {
+    //     if(isCandidateProfileComplete()) {
+    //         $candidate = Candidate::where('user_id', auth()->user()->id)->first();
+    //         $candidate->profile_complete = 1;
+    //         $candidate->visibility = 1;
+    //         $candidate->save();
+    //     }
+    // }
+
 
 
 }

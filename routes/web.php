@@ -53,6 +53,10 @@ Route::group(
         Route::resource('experience', CandidateExperienceController::class);
         Route::resource('education', CandidateEductionController::class);
 
+        Route::post('/profile/account-info-update', [CandidateProfileController::class, 'AccountInfoUpdate'])->name('profile.account-info.update');
+        Route::post('/profile/account-email-update', [CandidateProfileController::class, 'AccountEmailUpdate'])->name('profile.account-email.update');
+        Route::post('/profile/account-password-update', [CandidateProfileController::class, 'AccountPasswordUpdate'])->name('profile.account-password.update');
+
     }
 );
 /* Company Routes */
