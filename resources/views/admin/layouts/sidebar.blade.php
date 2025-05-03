@@ -132,6 +132,7 @@
 
                 </ul>
             </li>
+            <li class="{{ setSidebarActive(['admin.plans.*']) }}"><a class="nav-link" href="{{ route('admin.plans.index') }}"><i class="far fa-square"></i> <span>Price Plan</span></a></li>
 
 
 
