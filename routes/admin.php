@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\OrganizationTypeController;
 use App\Http\Controllers\Admin\PaymentSettingController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\ProfessionController;
+use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\StateController;
 use Illuminate\Support\Facades\Route;
@@ -80,6 +81,11 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
       Route::post('paypal-settings', [PaymentSettingController::class, 'updatePaypalSetting'])->name('paypal-settings.update');
       Route::post('stripe-settings', [PaymentSettingController::class, 'updateStripeSetting'])->name('stripe-settings.update');
       Route::post('razorpay-settings', [PaymentSettingController::class, 'updateRazorpaySetting'])->name('razorpay-settings.update');
+
+       /** Site Settings Routes */
+    Route::get('site-settings', [SiteSettingController::class, 'index'])->name('site-settings.index');
+    Route::post('general-settings', [SiteSettingController::class, 'updateGeneralSetting'])->name('general-settings.update');
+    Route::post('logo-settings', [SiteSettingController::class, 'updateLogoSetting'])->name('logo-settings.update');
 
 
 });
