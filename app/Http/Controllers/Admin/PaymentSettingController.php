@@ -32,8 +32,8 @@ class PaymentSettingController extends Controller
                 ['value' => $value]
             );
         }
-        // $settingsService = app(PaymentGatewaySettingService::class);
-        // $settingsService->clearCachedSettings();
+        $settingsService = app(PaymentGatewaySettingService::class);
+        $settingsService->clearCachedSettings();
 
         Notify::updatedNotification();
 
