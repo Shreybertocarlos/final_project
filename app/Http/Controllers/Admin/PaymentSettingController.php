@@ -22,4 +22,23 @@ class PaymentSettingController extends Controller
 
         return view('admin.payment-setting.index');
     }
+    function updatePaypalSetting(PaypalSettingUpdateReqeust $request) : RedirectResponse {
+
+        $validatedData = $request->validated();
+
+        foreach($validatedData as $key => $value) {
+            PaymentSetting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value]
+            );
+        }
+        // $settingsService = app(PaymentGatewaySettingService::class);
+        // $settingsService->clearCachedSettings();
+
+        Notify::updatedNotification();
+
+
+        return redirect()->back();
+    }
+
 }
