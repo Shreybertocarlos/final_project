@@ -50,78 +50,81 @@ class PaymentController extends Controller
 
     // Paypal Payment
 
-    // function payWithPaypal()
-    // {
-    //     abort_if(!$this->checkSession(), 404);
+    function payWithPaypal()
+    {
+        abort_if(!$this->checkSession(), 404);
 
-    //     $config = $this->setPaypalConfig();
+        $config = $this->setPaypalConfig();
 
-    //     $provider = new PayPalClient($config);
-    //     $provider->getAccessToken();
+        $provider = new PayPalClient($config);
+        $provider->getAccessToken();
 
-    //     // calculate payable amount
-    //     $payableAmount = round(Session::get('selected_plan')['price'] * config('gatewaySettings.paypal_currency_rate'));
+        // calculate payable amount
+        $payableAmount = round(Session::get('selected_plan')['price'] * config('gatewaySettings.paypal_currency_rate'));
 
-    //     $response = $provider->createOrder([
-    //         'intent' => 'CAPTURE',
-    //         'application_context' => [
-    //             'return_url' => route('company.paypal.success'),
-    //             'cancel_url' => route('company.paypal.cancel')
-    //         ],
-    //         'purchase_units' => [
-    //             [
-    //                 'amount' => [
-    //                     'currency_code' => config('gatewaySettings.paypal_currency_name'),
-    //                     'value' => $payableAmount
-    //                 ]
-    //             ]
-    //         ]
-    //     ]);
 
-    //     if(isset($response['id']) && $response['id'] !== NULL) {
-    //         foreach($response['links'] as $link) {
-    //             if($link['rel'] === 'approve') {
-    //                 return redirect()->away($link['href']);
-    //             }
-    //         }
-    //     }
 
-    // }
+        $response = $provider->createOrder([
+            'intent' => 'CAPTURE',
+            'application_context' => [
+                'return_url' => route('company.paypal.success'),
+                'cancel_url' => route('company.paypal.cancel')
+            ],
+            'purchase_units' => [
+                [
+                    'amount' => [
+                        'currency_code' => config('gatewaySettings.paypal_currency_name'),
+                        'value' => $payableAmount
+                    ]
+                ]
+            ]
+        ]);
 
-    function payWithPaypal(){
-        dd($this->setPaypalConfig());
+        if(isset($response['id']) && $response['id'] !== NULL) {
+            foreach($response['links'] as $link) {
+                if($link['rel'] === 'approve') {
+                    return redirect()->away($link['href']);
+                }
+            }
+        }
+
     }
 
-    // function paypalSuccess(Request $request)
-    // {
-    //     abort_if(!$this->checkSession(), 404);
 
-    //     $config = $this->setPaypalConfig();
 
-    //     $provider = new PayPalClient($config);
-    //     $provider->getAccessToken();
+    function paypalSuccess(Request $request)
+    {
+        abort_if(!$this->checkSession(), 404);
 
-    //     $response = $provider->capturePaymentOrder($request->token);
+        $config = $this->setPaypalConfig();
 
-    //     if(isset($response['status']) && $response['status'] === 'COMPLETED') {
-    //         $capture = $response['purchase_units'][0]['payments']['captures'][0];
+        $provider = new PayPalClient($config);
+        $provider->getAccessToken();
 
-    //         try {
+        $response = $provider->capturePaymentOrder($request->token);
 
-    //             OrderService::storeOrder($capture['id'], 'payPal', $capture['amount']['value'], $capture['amount']['currency_code'], 'paid');
 
-    //             OrderService::setUserPlan();
 
-    //             Session::forget('selected_plan');
-    //             return redirect()->route('company.payment.success');
-    //         }catch(\Exception $e) {
-    //             logger( 'Payment ERROR >> '. $e);
-    //         }
-    //     }
+        if(isset($response['status']) && $response['status'] === 'COMPLETED') {
+            $capture = $response['purchase_units'][0]['payments']['captures'][0];
 
-    //     return redirect()->route('company.payment.error')->withErrors(['error' => $response['error']['message']]);
+            try {
 
-    // }
+                OrderService::storeOrder($capture['id'], 'payPal', $capture['amount']['value'], $capture['amount']['currency_code'], 'paid');
+
+                OrderService::setUserPlan();
+
+                Session::forget('selected_plan');
+
+                return redirect()->route('company.payment.success');
+            }catch(\Exception $e) {
+                logger( 'Payment ERROR >> '. $e);
+            }
+        }
+
+        return redirect()->route('company.payment.error')->withErrors(['error' => $response['error']['message']]);
+
+    }
 
     function paypalCancel()
     {
