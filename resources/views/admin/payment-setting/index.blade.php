@@ -33,8 +33,8 @@
                         @include('admin.payment-setting.sections.paypal-section')
 
                         @include('admin.payment-setting.sections.stripe-section')
-{{-- 
-                        @include('admin.payment-setting.sections.razorpay-section') --}}
+
+                        @include('admin.payment-setting.sections.razorpay-section')
 
                       </div>
                     </div>

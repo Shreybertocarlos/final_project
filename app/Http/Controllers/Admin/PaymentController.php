@@ -197,38 +197,38 @@ class PaymentController extends Controller
         return view('frontend.pages.razorpay-redirect');
     }
 
-    // function payWithRazorpay(Request $request) {
-    //     abort_if(!$this->checkSession(), 404);
+    function payWithRazorpay(Request $request) {
+        abort_if(!$this->checkSession(), 404);
 
-    //     $api = new RazorpayApi(
-    //         config('gatewaySettings.razorpay_key'),
-    //         config('gatewaySettings.razorpay_secret_key')
-    //     );
+        $api = new RazorpayApi(
+            config('gatewaySettings.razorpay_key'),
+            config('gatewaySettings.razorpay_secret_key')
+        );
 
-    //     if(isset($request->razorpay_payment_id) && $request->filled('razorpay_payment_id')) {
-    //         $payableAmount = (session('selected_plan')['price'] * config('gatewaySettings.razorpay_currency_rate')) * 100;
+        if(isset($request->razorpay_payment_id) && $request->filled('razorpay_payment_id')) {
+            $payableAmount = (session('selected_plan')['price'] * config('gatewaySettings.razorpay_currency_rate')) * 100;
 
-    //         try {
-    //             $response = $api->payment
-    //                 ->fetch($request->razorpay_payment_id)
-    //                 ->capture(['amount' => $payableAmount]);
+            try {
+                $response = $api->payment
+                    ->fetch($request->razorpay_payment_id)
+                    ->capture(['amount' => $payableAmount]);
 
-    //             if($response['status'] === 'captured') {
-    //                 OrderService::storeOrder($response->id, 'razorpay', ($response->amount / 100), $response->currency, 'paid');
+                if($response['status'] === 'captured') {
+                    OrderService::storeOrder($response->id, 'razorpay', ($response->amount / 100), $response->currency, 'paid');
 
-    //                 OrderService::setUserPlan();
+                    OrderService::setUserPlan();
 
-    //                 Session::forget('selected_plan');
-    //                 return redirect()->route('company.payment.success');
-    //             }else {
-    //                 redirect()->route('company.payment.error')->withErrors(['error' => 'Something went wrong please try again.']);
-    //             }
-    //         }catch(\Exception $e) {
-    //             logger($e);
-    //             redirect()->route('company.payment.error')->withErrors(['error' => $e->getMessage()]);
-    //         }
-    //     }
-    // }
+                    Session::forget('selected_plan');
+                    return redirect()->route('company.payment.success');
+                }else {
+                    redirect()->route('company.payment.error')->withErrors(['error' => 'Something went wrong please try again.']);
+                }
+            }catch(\Exception $e) {
+                logger($e);
+                redirect()->route('company.payment.error')->withErrors(['error' => $e->getMessage()]);
+            }
+        }
+    }
 
 
     /** check session for selected plan */

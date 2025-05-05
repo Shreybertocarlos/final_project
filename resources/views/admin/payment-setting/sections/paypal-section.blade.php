@@ -1,4 +1,3 @@
-</div> 
 
 <div class="tab-pane fade show active" id="home4" role="tabpanel" aria-labelledby="home-tab4">
     <div class="card">

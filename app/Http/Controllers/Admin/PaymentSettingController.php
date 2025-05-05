@@ -58,4 +58,21 @@ class PaymentSettingController extends Controller
         return redirect()->back();
     }
 
+    function updateRazorpaySetting(RazorpaySettingUpdateRequest $request) : RedirectResponse {
+        $validatedData = $request->validated();
+
+        foreach($validatedData as $key => $value) {
+            PaymentSetting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value]
+            );
+        }
+        $settingsService = app(PaymentGatewaySettingService::class);
+        $settingsService->clearCachedSettings();
+
+        Notify::updatedNotification();
+
+        return redirect()->back();
+    }
+
 }
