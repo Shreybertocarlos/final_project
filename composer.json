@@ -11,6 +11,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "laraveldaily/laravel-invoices": "^4.1",
         "nesbot/carbon": "^2.72",
         "php-flasher/flasher-notyf-laravel": "^1.15",
         "razorpay/razorpay": "2.*",

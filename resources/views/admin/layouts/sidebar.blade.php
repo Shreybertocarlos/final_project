@@ -93,10 +93,10 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.html">Stisla</a>
+            <a href="index.html">Admin</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
+            <a href="index.html">ADMIN</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
@@ -105,6 +105,7 @@
 
             </li>
             <li class="menu-header">Starter</li>
+            <li class="{{ setSidebarActive(['admin.orders.*']) }}"><a class="nav-link" href="{{ route('admin.orders.index') }}"><i class="fas fa-cart-plus"></i> <span>Orders</span></a></li>
 
              <li class="dropdown {{ setSidebarActive(
                 ['admin.industry-types.*',
