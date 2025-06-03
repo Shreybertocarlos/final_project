@@ -40,36 +40,4 @@ class SiteSettingController extends Controller
         return redirect()->back();
     }
 
-//     function updateLogoSetting(Request $request) : RedirectResponse {
-//         $request->validate([
-//             'logo' => ['image', 'max:2000'],
-//             'favicon' => ['image', 'max:2000'],
-//         ]);
-
-//         $logoPath = $this->uploadFile($request, 'logo');
-//         $faviconPath = $this->uploadFile($request, 'favicon');
-
-//         $logoData = [];
-//         if($logoPath) $logoData['value'] = $logoPath;
-
-//         SiteSetting::updateOrCreate(
-//             ['key' => 'site_logo'],
-//             $logoData
-//         );
-
-//         $faviconData = [];
-//         if($faviconPath) $faviconData['value'] = $faviconPath;
-
-//         SiteSetting::updateOrCreate(
-//             ['key' => 'site_favicon'],
-//             $faviconData
-//         );
-
-//         $siteSetting = app()->make(SiteSettingService::class);
-//         $siteSetting->clearCachedSettings();
-
-//         Notify::updatedNotification();
-
-//         return redirect()->back();
-//     }
 }

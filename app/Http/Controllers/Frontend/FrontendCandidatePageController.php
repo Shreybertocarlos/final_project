@@ -35,8 +35,7 @@ class FrontendCandidatePageController extends Controller
 
         return view('frontend.pages.candidate-index', compact('candidates', 'skills', 'experiences'));
 
-        // $candidates= Candidate:: where(['profile_complete'=>1,'visibility' =>1])->get();
-        // return view('frontend.pages.candidate-index',compact('candidates'));
+        
     }
 
     function show(string $slug) : View {

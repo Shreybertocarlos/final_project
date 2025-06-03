@@ -17,10 +17,7 @@ class SkillController extends Controller
 {
     use Searchable;
 
-    // function __construct()
-    // {
-    //     $this->middleware(['permission:job attributes']);
-    // }
+
 
     /**
      * Display a listing of the resource.
@@ -93,13 +90,7 @@ class SkillController extends Controller
      */
     public function destroy(string $id)
     {
-        // $skillExist = JobSkills::where('skill_id', $id)->exists();
-        // $candidateSkillExist = CandidateSkill::where('skill_id', $id)->exists();
-
-
-        // if($skillExist || $candidateSkillExist) {
-        //     return response(['message' => 'This item is already been used can\'t delete!'], 500);
-        // }
+        
 
         try {
             Skill::findOrFail($id)->delete();

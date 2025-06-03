@@ -393,6 +393,19 @@ namespace App\Models{
 /**
  * 
  *
+ * @method static \Illuminate\Database\Eloquent\Builder|JobCategory findSimilarSlugs(string $attribute, array $config, string $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobCategory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobCategory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobCategory query()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobCategory withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
+ */
+	class JobCategory extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
  * @property int $id
  * @property string $name
  * @property string $slug
@@ -683,10 +696,28 @@ namespace App\Models{
 /**
  * 
  *
+ * @property int $id
+ * @property int $company_id
+ * @property int $plan_id
+ * @property int $job_limit
+ * @property int $featured_job_limit
+ * @property int $highlight_job_limit
+ * @property int $profile_verified
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Plan|null $plan
  * @method static \Illuminate\Database\Eloquent\Builder|UserPlan newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserPlan newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserPlan query()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan whereFeaturedJobLimit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan whereHighlightJobLimit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan whereJobLimit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan wherePlanId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan whereProfileVerified($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan whereUpdatedAt($value)
  */
 	class UserPlan extends \Eloquent {}
 }
