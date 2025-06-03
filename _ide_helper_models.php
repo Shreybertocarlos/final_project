@@ -349,10 +349,20 @@ namespace App\Models{
 /**
  * 
  *
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Education findSimilarSlugs(string $attribute, array $config, string $slug)
  * @method static \Illuminate\Database\Eloquent\Builder|Education newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Education newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Education query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Education whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Education whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Education whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Education whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Education whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Education withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
  */
 	class Education extends \Eloquent {}
@@ -429,6 +439,29 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|JobCategory withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
  */
 	class JobCategory extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|JobType findSimilarSlugs(string $attribute, array $config, string $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobType whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobType whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobType whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobType whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobType withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
+ */
+	class JobType extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -593,6 +626,19 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Profession withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
  */
 	class Profession extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|SalaryType findSimilarSlugs(string $attribute, array $config, string $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|SalaryType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SalaryType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SalaryType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|SalaryType withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
+ */
+	class SalaryType extends \Eloquent {}
 }
 
 namespace App\Models{

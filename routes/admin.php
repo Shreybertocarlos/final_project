@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EducationController;
 use App\Http\Controllers\Admin\IndustryTypeController;
 use App\Http\Controllers\Admin\JobCategoryController;
+use App\Http\Controllers\Admin\JobTypeController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\OrderController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\Admin\OrganizationTypeController;
 use App\Http\Controllers\Admin\PaymentSettingController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\ProfessionController;
+use App\Http\Controllers\Admin\SalaryTypeController;
 use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\StateController;
@@ -88,6 +90,10 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
     Route::resource('job-categories', JobCategoryController::class);
      /** Job Eduction Routes */
     Route::resource('educations', EducationController::class);
+     /** Job Type Routes */
+    Route::resource('job-types', JobTypeController::class);
+    /** Job salary type Routes */
+    Route::resource('salary-types', SalaryTypeController::class);
 
       /** Payment Settings Routes */
       Route::get('payment-settings', [PaymentSettingController::class, 'index'])->name('payment-settings.index');
