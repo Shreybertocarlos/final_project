@@ -349,6 +349,19 @@ namespace App\Models{
 /**
  * 
  *
+ * @method static \Illuminate\Database\Eloquent\Builder|Education findSimilarSlugs(string $attribute, array $config, string $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|Education newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Education newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Education query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Education withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
+ */
+	class Education extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
  * @property int $id
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -393,10 +406,26 @@ namespace App\Models{
 /**
  * 
  *
+ * @property int $id
+ * @property string $icon
+ * @property string $name
+ * @property string $slug
+ * @property int $show_at_popular
+ * @property int $show_at_featured
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|JobCategory findSimilarSlugs(string $attribute, array $config, string $slug)
  * @method static \Illuminate\Database\Eloquent\Builder|JobCategory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JobCategory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JobCategory query()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobCategory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobCategory whereIcon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobCategory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobCategory whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobCategory whereShowAtFeatured($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobCategory whereShowAtPopular($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobCategory whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobCategory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobCategory withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
  */
 	class JobCategory extends \Eloquent {}
