@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EducationController;
 use App\Http\Controllers\Admin\IndustryTypeController;
 use App\Http\Controllers\Admin\JobCategoryController;
+use App\Http\Controllers\Admin\JobExperienceController;
+use App\Http\Controllers\Admin\JobRoleController;
 use App\Http\Controllers\Admin\JobTypeController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\LocationController;
@@ -27,6 +29,7 @@ use App\Http\Controllers\Admin\SalaryTypeController;
 use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\StateController;
+use App\Http\Controllers\Admin\TagController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['guest:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
@@ -94,6 +97,12 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
     Route::resource('job-types', JobTypeController::class);
     /** Job salary type Routes */
     Route::resource('salary-types', SalaryTypeController::class);
+     /** Job tag Routes */
+    Route::resource('tags', TagController::class);
+    /** Job type */
+    Route::resource('job-roles', JobRoleController::class);
+    /** Job experience */
+    Route::resource('job-experiences', JobExperienceController::class);
 
       /** Payment Settings Routes */
       Route::get('payment-settings', [PaymentSettingController::class, 'index'])->name('payment-settings.index');

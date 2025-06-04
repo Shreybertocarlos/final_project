@@ -59,6 +59,7 @@
     <script src="{{ asset('admin/assets/modules/sweetalert/sweetalert.min.js') }}"></script>
     <script src="{{ asset('admin/assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/bootstrap-iconpicker.bundle.min.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
     <!-- Template JS File -->
 
     <script src="{{ asset('admin/assets/js/scripts.js') }}"></script>
