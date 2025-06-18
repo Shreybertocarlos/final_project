@@ -49,6 +49,27 @@ namespace App\Models{
  * 
  *
  * @property int $id
+ * @property int $company_id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Benefits newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Benefits newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Benefits query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Benefits whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Benefits whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Benefits whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Benefits whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Benefits whereUpdatedAt($value)
+ */
+	class Benefits extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
  * @property int $user_id
  * @property int|null $experience_id
  * @property int|null $profession_id
@@ -417,6 +438,128 @@ namespace App\Models{
  * 
  *
  * @property int $id
+ * @property int $company_id
+ * @property int $job_category_id
+ * @property int $job_role_id
+ * @property int $job_experience_id
+ * @property int $education_id
+ * @property int $job_type_id
+ * @property int $salary_type_id
+ * @property string $title
+ * @property string $slug
+ * @property string $vacancies
+ * @property float|null $min_salary
+ * @property float|null $max_salary
+ * @property string|null $custom_salary
+ * @property string $deadline
+ * @property string $description
+ * @property string $status
+ * @property string $apply_on
+ * @property string|null $apply_email
+ * @property string|null $apply_url
+ * @property int|null $featured
+ * @property int|null $highlight
+ * @property string|null $featured_until
+ * @property string|null $highlight_until
+ * @property int $total_views
+ * @property int|null $city_id
+ * @property int|null $state_id
+ * @property int|null $country_id
+ * @property string|null $address
+ * @property string $salary_mode
+ * @property string|null $company_name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\JobBenefits> $benefits
+ * @property-read int|null $benefits_count
+ * @property-read \App\Models\JobCategory $category
+ * @property-read \App\Models\City|null $city
+ * @property-read \App\Models\Company $company
+ * @property-read \App\Models\Country|null $country
+ * @property-read \App\Models\Education|null $jobEduction
+ * @property-read \App\Models\JobExperience|null $jobExperience
+ * @property-read \App\Models\JobRole|null $jobRole
+ * @property-read \App\Models\JobType|null $jobType
+ * @property-read \App\Models\SalaryType|null $salaryType
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\JobSkills> $skills
+ * @property-read int|null $skills_count
+ * @property-read \App\Models\State|null $state
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\JobTag> $tags
+ * @property-read int|null $tags_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Job findSimilarSlugs(string $attribute, array $config, string $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Job newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Job onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Job query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereApplyEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereApplyOn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereApplyUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereCityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereCompanyName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereCustomSalary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereDeadline($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereEducationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereFeatured($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereFeaturedUntil($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereHighlight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereHighlightUntil($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereJobCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereJobExperienceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereJobRoleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereJobTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereMaxSalary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereMinSalary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereSalaryMode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereSalaryTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereStateId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereTotalViews($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereVacancies($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Job withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job withoutTrashed()
+ */
+	class Job extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $job_id
+ * @property int $benefit_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Benefits|null $benefit
+ * @method static \Illuminate\Database\Eloquent\Builder|JobBenefits newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobBenefits newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobBenefits query()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobBenefits whereBenefitId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobBenefits whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobBenefits whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobBenefits whereJobId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobBenefits whereUpdatedAt($value)
+ */
+	class JobBenefits extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
  * @property string $icon
  * @property string $name
  * @property string $slug
@@ -445,10 +588,20 @@ namespace App\Models{
 /**
  * 
  *
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|JobExperience findSimilarSlugs(string $attribute, array $config, string $slug)
  * @method static \Illuminate\Database\Eloquent\Builder|JobExperience newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JobExperience newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JobExperience query()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobExperience whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobExperience whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobExperience whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobExperience whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobExperience whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobExperience withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
  */
 	class JobExperience extends \Eloquent {}
@@ -475,6 +628,50 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|JobRole withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
  */
 	class JobRole extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $job_id
+ * @property int $skill_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Skill|null $skill
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkills newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkills newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkills query()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkills whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkills whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkills whereJobId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkills whereSkillId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkills whereUpdatedAt($value)
+ */
+	class JobSkills extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $job_id
+ * @property int $tag_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Tag|null $tag
+ * @method static \Illuminate\Database\Eloquent\Builder|JobTag newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobTag newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobTag query()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobTag whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobTag whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobTag whereJobId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobTag whereTagId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobTag whereUpdatedAt($value)
+ */
+	class JobTag extends \Eloquent {}
 }
 
 namespace App\Models{
