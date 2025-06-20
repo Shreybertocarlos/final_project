@@ -64,4 +64,11 @@ class Company extends Model
     function companyCity() : BelongsTo {
         return $this->belongsTo(City::class, 'city', 'id');
     }
+    function userPlan() : HasOne {
+        return $this->hasOne(UserPlan::class, 'company_id', 'id');
+    }
+
+    function jobs() : HasMany {
+        return $this->hasMany(Job::class, 'company_id', 'id');
+    }
 }
