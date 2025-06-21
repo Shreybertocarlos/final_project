@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\FrontendJobPageController;
 use App\Http\Controllers\Frontend\jobController as FrontendJobController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Fronted\CandidateDashboardController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Frontend\CompanyOrderController;
 use App\Http\Controllers\Frontend\CompanyProfileController;
 use App\Http\Controllers\Frontend\FrontendCandidatePageController;
 use App\Http\Controllers\Frontend\FrontendCompanyPageController;
+use App\Http\Controllers\Frontend\FrontendJobPageController as FrontendFrontendJobPageController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\LocationController;
 use App\Http\Controllers\Frontend\PricingPageController;
@@ -49,6 +51,12 @@ Route::get('candidates/{slug}', [FrontendCandidatePageController::class, 'show']
 
 Route::get('pricing', PricingPageController::class)->name('pricing.index');
 Route::get('checkout/{plan_id}', CheckoutPageController::class)->name('checkout.index');
+
+/** Find a job route */
+Route::get('jobs', [FrontendJobPageController::class, 'index'])->name('jobs.index');
+Route::get('jobs/{slug}', [FrontendJobPageController::class, 'show'])->name('jobs.show');
+Route::post('apply-job/{id}', [FrontendJobPageController::class, 'applyJob'])->name('apply-job.store');
+// Route::get('job-bookmark/{id}', [CandidateJobBookmarkController::class, 'save'])->name('job.bookmark');
 
 /* Candidate Dashboard Routes */
 

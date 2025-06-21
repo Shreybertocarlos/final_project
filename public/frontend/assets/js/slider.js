@@ -14,13 +14,13 @@ $(document).ready(function () {
             prefix: ""
         });
         noUiSlider.create(rangeSlider, {
-            start: 280,
+            start: 5000,
             animate: false,
             tooltips: true,
             step: 1,
             range: {
                 min: 0,
-                max: 500
+                max: 100000
             },
             format: moneyFormat
         });

@@ -94,7 +94,7 @@
                                                     <i class="fas fa-cog"></i>
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                  <li><a class="dropdown-item" href="{{ route('company.job.applications', $job->id) }}">Applications</a></li>
+                                                  {{-- <li><a class="dropdown-item" href="{{ route('company.job.applications', $job->id) }}">Applications</a></li> --}}
                                                   <li><a class="dropdown-item" href="{{ route('company.jobs.edit', $job->id) }}">Edit</a></li>
                                                   <li><a class="dropdown-item delete-item" href="{{ route('company.jobs.destroy', $job->id) }}">Delete</a></li>
                                                 </ul>
