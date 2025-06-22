@@ -80,7 +80,7 @@
                                         <td>{{ formatDate($job->deadline) }}</td>
                                         <td>
                                             @if ($job->status === 'pending')
-                                                <span class="badge bg-warning">Pending</span>
+                                                <span class="badge bg-warning">Peinding</span>
                                             @elseif ($job->deadline > date('Y-m-d'))
                                                 <span class="badge bg-success ">Active</span>
                                             @else
@@ -94,7 +94,7 @@
                                                     <i class="fas fa-cog"></i>
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                  {{-- <li><a class="dropdown-item" href="{{ route('company.job.applications', $job->id) }}">Applications</a></li> --}}
+                                                  <li><a class="dropdown-item" href="{{ route('company.job.applications', $job->id) }}">Applications</a></li>
                                                   <li><a class="dropdown-item" href="{{ route('company.jobs.edit', $job->id) }}">Edit</a></li>
                                                   <li><a class="dropdown-item delete-item" href="{{ route('company.jobs.destroy', $job->id) }}">Delete</a></li>
                                                 </ul>

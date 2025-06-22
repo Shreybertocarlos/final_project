@@ -89,13 +89,13 @@ class JobExperienceController extends Controller
     public function destroy(string $id)
     {
         // validation
-        // $jobExist = Job::where('job_experience_id', $id)->exists();
-        // $candidateExist = Candidate::where('experience_id', $id)->exists();
+        $jobExist = Job::where('job_experience_id', $id)->exists();
+        $candidateExist = Candidate::where('experience_id', $id)->exists();
 
 
-        // if($jobExist || $candidateExist) {
-        //     return response(['message' => 'This item is already been used can\'t delete!'], 500);
-        // }
+        if($jobExist || $candidateExist) {
+            return response(['message' => 'This item is already been used can\'t delete!'], 500);
+        }
 
         try {
             JobExperience::findOrFail($id)->delete();

@@ -128,7 +128,7 @@
                 <a data-social="facebook" class="mr-5 d-inline-block d-middle" href="#"><img alt="joblist" src="{{ asset('frontend/assets/imgs/template/icons/share-fb.svg') }}"></a>
                 <a data-social="twitter" class="mr-5 d-inline-block d-middle" href="#"><img alt="joblist" src="{{ asset('frontend/assets/imgs/template/icons/share-tw.svg') }}"></a>
                 <a data-social="reddit" class="mr-5 d-inline-block d-middle" href="#"><img alt="joblist" src="{{asset('frontend/assets/imgs/template/icons/share-red.svg')}}"></a>
-                <a data-social="linkedin" class="d-inline-block d-middle" href="#"><img alt="joblist" src="{{ asset('frontend/assets/imgs/template/icons/share-in.svg') }}"></a>
+                {{-- <a data-social="linkedin" class="d-inline-block d-middle" href="#"><img alt="joblist" src="{{ asset('frontend/assets/imgs/template/icons/share-in.svg') }}"></a> --}}
               </div>
             </div>
           </div>

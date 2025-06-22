@@ -508,14 +508,14 @@
     });
 
     //Dropdown selected item
-    $(".dropdown-menu li a").on("click", function(e) {
-        e.preventDefault();
-        $(this)
-            .parents(".dropdown")
-            .find(".btn span")
-            .html($(this).text() + ' <span class="caret"></span>');
-        $(this).parents(".dropdown").find(".btn").val($(this).data("value"));
-    });
+    // $(".dropdown-menu li a").on("click", function(e) {
+    //     e.preventDefault();
+    //     $(this)
+    //         .parents(".dropdown")
+    //         .find(".btn span")
+    //         .html($(this).text() + ' <span class="caret"></span>');
+    //     $(this).parents(".dropdown").find(".btn").val($(this).data("value"));
+    // });
     $(".list-tags-job .remove-tags-job").on("click", function(e) {
         e.preventDefault();
         $(this).closest(".job-tag").remove();

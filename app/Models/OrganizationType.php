@@ -20,5 +20,7 @@ class OrganizationType extends Model
         ];
     }
 
-   
+    function companies() : HasMany {
+        return $this->hasMany(Company::class, 'organization_type_id', 'id');
+    }
 }

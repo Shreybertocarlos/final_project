@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Fronted\CandidateDashboardController;
 use App\Http\Controllers\Frontend\CandidateEductionController;
 use App\Http\Controllers\Frontend\CandidateExperienceController;
+use App\Http\Controllers\Frontend\CandidateJobBookmarkController;
+use App\Http\Controllers\Frontend\CandidateMyJobController;
 use App\Http\Controllers\Frontend\CandidateProfileController;
 use App\Http\Controllers\Frontend\CheckoutPageController;
 use App\Http\Controllers\Frontend\CompanyDashboardController;
@@ -56,7 +58,7 @@ Route::get('checkout/{plan_id}', CheckoutPageController::class)->name('checkout.
 Route::get('jobs', [FrontendJobPageController::class, 'index'])->name('jobs.index');
 Route::get('jobs/{slug}', [FrontendJobPageController::class, 'show'])->name('jobs.show');
 Route::post('apply-job/{id}', [FrontendJobPageController::class, 'applyJob'])->name('apply-job.store');
-// Route::get('job-bookmark/{id}', [CandidateJobBookmarkController::class, 'save'])->name('job.bookmark');
+Route::get('job-bookmark/{id}', [CandidateJobBookmarkController::class, 'save'])->name('job.bookmark');
 
 /* Candidate Dashboard Routes */
 
@@ -80,6 +82,13 @@ Route::group(
         Route::post('/profile/account-info-update', [CandidateProfileController::class, 'AccountInfoUpdate'])->name('profile.account-info.update');
         Route::post('/profile/account-email-update', [CandidateProfileController::class, 'AccountEmailUpdate'])->name('profile.account-email.update');
         Route::post('/profile/account-password-update', [CandidateProfileController::class, 'AccountPasswordUpdate'])->name('profile.account-password.update');
+
+        /** my job routes */
+    Route::get('applied-jobs', [CandidateMyJobController::class, 'index'])->name('applied-jobs.index');
+    Route::get('bookmarked-jobs', [CandidateJobBookmarkController::class, 'index'])->name('bookmarked-jobs.index');
+
+
+
 
     }
 );
@@ -108,7 +117,7 @@ Route::group(
      Route::get('orders/invoice/{id}', [CompanyOrderController::class, 'invoice'])->name('orders.invoice');
 
       /** Job Routes */
-    //  Route::get('applications/{id}', [FrontendJobController::class, 'applications'])->name('job.applications');
+     Route::get('applications/{id}', [FrontendJobController::class, 'applications'])->name('job.applications');
      Route::resource('jobs', FrontendJobController::class);
 
      /**Payment Routes */

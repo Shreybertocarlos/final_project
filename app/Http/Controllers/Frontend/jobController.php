@@ -37,18 +37,18 @@ class jobController extends Controller
     public function index()
     {
         $query = Job::query();
-        // $query->withCount('applications');
+        $query->withCount('applications');
         $this->search($query, ['title', 'slug']);
         $jobs = $query->where('company_id', auth()->user()->company?->id)->orderBy('id', 'DESC')->paginate(20);
         return view('frontend.company-dashboard.job.index', compact('jobs'));
     }
 
-    // function applications(string $id) : View {
-    //     $applications = AppliedJob::where('job_id', $id)->paginate(20);
+    function applications(string $id) : View {
+        $applications = AppliedJob::where('job_id', $id)->paginate(20);
 
-    //     $jobTitle = Job::select('title')->where('id', $id)->first();
-    //     return view('frontend.company-dashboard.applications.index', compact('applications', 'jobTitle'));
-    // }
+        $jobTitle = Job::select('title')->where('id', $id)->first();
+        return view('frontend.company-dashboard.applications.index', compact('applications', 'jobTitle'));
+    }
 
     /**
      * Show the form for creating a new resource.
