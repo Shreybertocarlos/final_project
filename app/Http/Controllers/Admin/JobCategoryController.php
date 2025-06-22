@@ -105,10 +105,10 @@ class JobCategoryController extends Controller
     public function destroy(string $id)
     {
         // validation
-        // $jobExist = Job::where('job_category_id', $id)->exists();
-        // if($jobExist) {
-        //     return response(['message' => 'This item is already been used can\'t delete!'], 500);
-        // }
+        $jobExist = Job::where('job_category_id', $id)->exists();
+        if($jobExist) {
+            return response(['message' => 'This item is already been used can\'t delete!'], 500);
+        }
 
         try {
             JobCategory::findOrFail($id)->delete();

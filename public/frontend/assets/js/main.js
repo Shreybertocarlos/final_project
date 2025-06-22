@@ -279,7 +279,7 @@
             spaceBetween: 15,
             slidesPerGroup: 3,
             slidesPerView: 5,
-            loop: true,
+            loop: false,
             pagination: {
                 el: ".swiper-pagination",
                 clickable: true
@@ -312,7 +312,7 @@
             spaceBetween: 30,
             slidesPerView: 4,
             slidesPerGroup: 1,
-            loop: true,
+            loop: false,
             navigation: {
                 nextEl: ".swiper-button-next-border",
                 prevEl: ".swiper-button-prev-border"

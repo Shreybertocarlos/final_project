@@ -11,27 +11,33 @@ use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EducationController;
+use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\IndustryTypeController;
 use App\Http\Controllers\Admin\JobCategoryController;
 use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\Admin\JobExperienceController;
+use App\Http\Controllers\Admin\JobLocationController;
 use App\Http\Controllers\Admin\JobRoleController;
 use App\Http\Controllers\Admin\JobTypeController;
 use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\LearnMoreController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\OrganizationTypeController;
 use App\Http\Controllers\Admin\PaymentSettingController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\ProfessionController;
+use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SalaryTypeController;
 use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\WhyChooseUsController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['guest:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
@@ -110,6 +116,22 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
     Route::resource('jobs', JobController::class);
     /** Blogs */
     Route::resource('blogs', BlogController::class);
+
+      /** Hero Section */
+    Route::resource('hero', HeroController::class);
+     /** Why Choose Us Section */
+    Route::resource('why-choose-us', WhyChooseUsController::class);
+    /** learn more Section */
+    Route::resource('learn-more', LearnMoreController::class);
+    /** Counter Section */
+    Route::resource('counter', CounterController::class);
+    /** Job Location Section */
+    Route::resource('job-location', JobLocationController::class);
+    /** review Section */
+    Route::resource('reviews', ReviewController::class);
+
+    /** About us page route */
+    // Route::resource('about-us', AboutController::class);
 
       /** Payment Settings Routes */
       Route::get('payment-settings', [PaymentSettingController::class, 'index'])->name('payment-settings.index');
