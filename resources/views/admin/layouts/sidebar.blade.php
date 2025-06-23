@@ -242,6 +242,8 @@
                     href="{{ route('admin.site-settings.index') }}"><i class="far fa-square"></i> <span>Site
                         Settings</span></a></li>
 
+             <li class="{{ setSidebarActive(['admin.clear-database.index']) }}"><a class="nav-link" href="{{ route('admin.clear-database.index') }}"><i class="fas fa-skull-crossbones"></i> <span>Clear Database</span></a></li>
+
 
 
             {{-- <li class="dropdown">
