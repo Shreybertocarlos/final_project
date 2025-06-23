@@ -89,11 +89,11 @@ class LanguageController extends Controller
      */
     public function destroy(string $id) : Response
     {
-        // $Language = CandidateLanguage::where('language_id', $id)->exists();
+        $Language = CandidateLanguage::where('language_id', $id)->exists();
 
-        // if($Language) {
-        //     return response(['message' => 'This item is already been used can\'t delete!'], 500);
-        // }
+        if($Language) {
+            return response(['message' => 'This item is already been used can\'t delete!'], 500);
+        }
 
         try {
             Language::findOrFail($id)->delete();

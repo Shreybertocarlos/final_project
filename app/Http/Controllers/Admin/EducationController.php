@@ -91,12 +91,12 @@ class EducationController extends Controller
      */
     public function destroy(string $id)
     {
-        // validation
-        // $jobExist = Job::where('education_id', $id)->exists();
+        //validation
+        $jobExist = Job::where('education_id', $id)->exists();
 
-        // if($jobExist) {
-        //     return response(['message' => 'This item is already been used can\'t delete!'], 500);
-        // }
+        if($jobExist) {
+            return response(['message' => 'This item is already been used can\'t delete!'], 500);
+        }
 
         try {
             Education::findOrFail($id)->delete();

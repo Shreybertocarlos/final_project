@@ -16,6 +16,31 @@ namespace App\Models{
  * 
  *
  * @property int $id
+ * @property string $image
+ * @property string $title
+ * @property string $description
+ * @property string|null $url
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|About newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|About newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|About query()
+ * @method static \Illuminate\Database\Eloquent\Builder|About whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|About whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|About whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|About whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|About whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|About whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|About whereUrl($value)
+ */
+	class About extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
  * @property string $name
  * @property string $image
  * @property string $email
@@ -464,6 +489,31 @@ namespace App\Models{
  * 
  *
  * @property int $id
+ * @property string $page_name
+ * @property string $slug
+ * @property string $content
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomPageBuilder findSimilarSlugs(string $attribute, array $config, string $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomPageBuilder newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomPageBuilder newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomPageBuilder query()
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomPageBuilder whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomPageBuilder whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomPageBuilder whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomPageBuilder wherePageName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomPageBuilder whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomPageBuilder whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomPageBuilder withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
+ */
+	class CustomPageBuilder extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
  * @property string $name
  * @property string $slug
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -499,6 +549,17 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Experience whereUpdatedAt($value)
  */
 	class Experience extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Footer newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Footer newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Footer query()
+ */
+	class Footer extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -755,10 +816,22 @@ namespace App\Models{
 /**
  * 
  *
+ * @property int $id
+ * @property string $image
+ * @property int $country_id
+ * @property string|null $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Country|null $country
  * @method static \Illuminate\Database\Eloquent\Builder|JobLocation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JobLocation newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JobLocation query()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobLocation whereCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobLocation whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobLocation whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobLocation whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobLocation whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobLocation whereUpdatedAt($value)
  */
 	class JobLocation extends \Eloquent {}
 }
@@ -1051,6 +1124,33 @@ namespace App\Models{
  * 
  *
  * @property int $id
+ * @property string $image
+ * @property string $name
+ * @property string $title
+ * @property string $review
+ * @property int $rating
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Review newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Review newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Review query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Review whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Review whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Review whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Review whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Review whereRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Review whereReview($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Review whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Review whereUpdatedAt($value)
+ */
+	class Review extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
  * @property string $name
  * @property string $slug
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -1133,6 +1233,25 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|State whereUpdatedAt($value)
  */
 	class State extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $email
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscribers newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscribers newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscribers query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscribers whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscribers whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscribers whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscribers whereUpdatedAt($value)
+ */
+	class Subscribers extends \Eloquent {}
 }
 
 namespace App\Models{

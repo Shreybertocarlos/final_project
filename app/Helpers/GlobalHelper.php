@@ -99,5 +99,19 @@ if(!function_exists('formatLocation')) {
         return $location;
     }
 }
+/** format location */
+if(!function_exists('calculateEarnings')) {
+    function calculateEarnings($amounts)
+    {
+
+        $total = 0;
+        foreach($amounts as $value){
+            $amount = intval(preg_replace('/[^0-9]/', '', $value));
+            $total += $amount;
+        }
+
+        return $total;
+    }
+}
 
 }

@@ -17,7 +17,7 @@ class ProfessionController extends Controller
 {
     use Searchable;
 
-   
+
 
     /**
      * Display a listing of the resource.
@@ -89,11 +89,11 @@ class ProfessionController extends Controller
      */
     public function destroy(string $id)
     {
-        // $candidateExist = Candidate::where('profession_id', $id)->exists();
+        $candidateExist = Candidate::where('profession_id', $id)->exists();
 
-        // if($candidateExist) {
-        //     return response(['message' => 'This item is already been used can\'t delete!'], 500);
-        // }
+        if($candidateExist) {
+            return response(['message' => 'This item is already been used can\'t delete!'], 500);
+        }
 
         try {
             Profession::findOrFail($id)->delete();

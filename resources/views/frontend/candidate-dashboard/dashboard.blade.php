@@ -30,15 +30,15 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-6">
                                     <div class="dash_overview_item bg-info-subtle">
-                                        {{-- <h2>{{ $jobAppliedCount }} <span>job applied</span></h2> --}}
+                                        <h2>{{ $jobAppliedCount }} <span>job applied</span></h2>
                                         <span class="icon"><i class="fas fa-briefcase"></i></span>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-6">
-                                    {{-- <div class="dash_overview_item bg-danger-subtle">
+                                    <div class="dash_overview_item bg-danger-subtle">
                                         <h2>{{ $userBookmarksCount }} <span>job Bookmarks</span></h2>
                                         <span class="icon"><i class="fas fa-bookmark"></i></span>
-                                    </div> --}}
+                                    </div>
                                 </div>
 
                             </div>
@@ -70,7 +70,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="experience-tbody">
-                                    {{-- @foreach ($appliedJobs as $appliedJob)
+                                    @foreach ($appliedJobs as $appliedJob)
                                         <tr>
                                             <td>
                                                 <div class="d-flex ">
@@ -114,7 +114,7 @@
                                             </td>
 
                                         </tr>
-                                    @endforeach --}}
+                                    @endforeach
 
 
                                 </tbody>

@@ -18,7 +18,7 @@ class OrganizationTypeController extends Controller
 {
     use Searchable;
 
-   
+
 
     /**
      * Display a listing of the resource.

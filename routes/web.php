@@ -4,6 +4,7 @@ use App\Http\Controllers\Frontend\FrontendJobPageController;
 use App\Http\Controllers\Frontend\jobController as FrontendJobController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Fronted\CandidateDashboardController;
+use App\Http\Controllers\Frontend\AboutUsPageController;
 use App\Http\Controllers\Frontend\CandidateEductionController;
 use App\Http\Controllers\Frontend\CandidateExperienceController;
 use App\Http\Controllers\Frontend\CandidateJobBookmarkController;
@@ -13,12 +14,14 @@ use App\Http\Controllers\Frontend\CheckoutPageController;
 use App\Http\Controllers\Frontend\CompanyDashboardController;
 use App\Http\Controllers\Frontend\CompanyOrderController;
 use App\Http\Controllers\Frontend\CompanyProfileController;
+use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\FrontendBlogPageController;
 use App\Http\Controllers\Frontend\FrontendCandidatePageController;
 use App\Http\Controllers\Frontend\FrontendCompanyPageController;
 use App\Http\Controllers\Frontend\FrontendJobPageController as FrontendFrontendJobPageController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\LocationController;
+use App\Http\Controllers\Frontend\NewsletterController;
 use App\Http\Controllers\Frontend\PricingPageController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Company;
@@ -65,6 +68,19 @@ Route::get('job-bookmark/{id}', [CandidateJobBookmarkController::class, 'save'])
 /** Blog Routes */
 Route::get('blogs', [FrontendBlogPageController::class, 'index'])->name('blogs.index');
 Route::get('blogs/{slug}', [FrontendBlogPageController::class, 'show'])->name('blogs.show');
+
+/** About Routes */
+Route::get('about-us', [AboutUsPageController::class, 'index'])->name('about.index');
+/** Contact  Routes */
+Route::get('contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('contact', [ContactController::class, 'sendMail'])->name('send-mail');
+
+/** Custom Page Routes */
+Route::get('page/{slug}', [HomeController::class, 'customPage'])->name('custom-page');
+
+/** Newsletter Routes */
+Route::post('newsletter', [NewsletterController::class, 'store'])->name('newsletter.store');
+
 
 
 /** Candidate Dashboard Routes */

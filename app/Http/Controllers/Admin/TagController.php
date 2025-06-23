@@ -88,11 +88,11 @@ class TagController extends Controller
     public function destroy(string $id)
     {
         // validation
-        // $jobTagExist = JobTag::where('tag_id', $id)->exists();
+        $jobTagExist = JobTag::where('tag_id', $id)->exists();
 
-        // if($jobTagExist) {
-        //     return response(['message' => 'This item is already been used can\'t delete!'], 500);
-        // }
+        if($jobTagExist) {
+            return response(['message' => 'This item is already been used can\'t delete!'], 500);
+        }
 
         try {
             Tag::findOrFail($id)->delete();

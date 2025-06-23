@@ -2,31 +2,37 @@
     <div class="container">
       <div class="main-header">
         <div class="header-left">
-          <div class="header-logo">
-            <a class="d-flex" href="index.html">
-            {{-- <img alt="joblist"
-                src="{{ asset('frontend/assets/imgs/template/logo.png') }}"> --}}
-            </a></div>
+          <div class="header-logo"><a class="d-flex" href="{{ url('/') }}"><img alt="Logo"
+                src="{{ config('settings.site_logo') }}"></a></div>
         </div>
         <div class="header-nav">
           <nav class="nav-main-menu">
+            @php
+                $navigationMenu = \Menu::getByName('Navigation Menu');
+
+            @endphp
             <ul class="main-menu">
-              <li class="has-children"><a class="active" href="index.html">Home</a></li>
-              <li class="has-children"><a href="jobs-list.html">Find a Job</a></li>
-              <li class="has-children"><a href="companies-grid.html">Recruiters</a></li>
-              <li class="has-children"><a href="candidates-grid.html">Candidates</a></li>
-              <li class="has-children"><a href="blog-grid.html">Pages</a>
-                <ul class="sub-menu">
-                  <li><a href="page-about.html">About Us</a></li>
-                  <li><a href="page-pricing.html">Pricing Plan</a></li>
-                  <li><a href="page-contact.html">Contact Us</a></li>
-                  <li><a href="page-register.html">Register</a></li>
-                  <li><a href="page-signin.html">Signin</a></li>
-                  <li><a href="page-reset-password.html">Reset Password</a></li>
-                  <li><a href="blog-details.html">Blog Single</a></li>
-                </ul>
-              </li>
-              <li class="has-children"><a href="blog-grid.html">Blog</a></li>
+                @foreach ($navigationMenu as $menu)
+
+                @if ($menu['child'])
+                <li class="has-children"><a href="{{ $menu['link'] }}">{{ $menu['label'] }}</a>
+                    <ul class="sub-menu">
+                        @foreach ($menu['child'] as $childMenu)
+                        <li><a href="{{ $childMenu['link'] }}">{{ $childMenu['label'] }}</a></li>
+                        @endforeach
+                    </ul>
+                  </li>
+                @else
+                  @if (auth()->user()?->role == 'candidate' && $menu['link'] != '/pricing')
+                  <li class="has-children"><a class="" href="{{ $menu['link'] }}">{{ $menu['label'] }}</a></li>
+                  @else
+                  <li class="has-children"><a class="" href="{{ $menu['link'] }}">{{ $menu['label'] }}</a></li>
+
+                  @endif
+                @endif
+
+                @endforeach
+
             </ul>
           </nav>
           <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span
@@ -39,19 +45,18 @@
             <a class="btn btn-default btn-shadow ml-40 hover-up" href="{{ route('login') }}">Sign in</a>
             @endguest
             @auth
-            @if (auth()->user()->role === 'company')
-                    <a class="btn btn-default btn-shadow ml-40 hover-up" style="width: 200px" href="{{ route('company.dashboard') }}">Company Dashboard</a>
+                @if (auth()->user()->role === 'company')
+                    <a class="btn btn-default btn-shadow ml-40 hover-up" style="width: 200px" href="{{ route('company.dashboard') }}">Company Dashobard</a>
                 @elseif(auth()->user()->role === 'candidate')
                     <a class="btn btn-default btn-shadow ml-40 hover-up" style="width: 200px" href="{{ route('candidate.dashboard') }}">Candidate Dashboard</a>
                 @endif
             @endauth
-
           </div>
         </div>
       </div>
     </div>
   </header>
-
+{{--
   <div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar">
     <div class="mobile-header-wrapper-inner">
       <div class="mobile-header-content-area">
@@ -212,4 +217,4 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
