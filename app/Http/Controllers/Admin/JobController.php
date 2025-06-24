@@ -31,13 +31,13 @@ class JobController extends Controller
 {
     use Searchable;
 
-    // function __construct()
-    // {
-    //     $this->middleware(['permission:job create|job update|job delete'])->only(['index']);
-    //     $this->middleware(['permission:job create'])->only(['create', 'store']);
-    //     $this->middleware(['permission:job update'])->only(['edit', 'update', 'changeStatus']);
-    //     $this->middleware(['permission:job delete'])->only(['destroy']);
-    // }
+    function __construct()
+    {
+        $this->middleware(['permission:job create|job update|job delete'])->only(['index']);
+        $this->middleware(['permission:job create'])->only(['create', 'store']);
+        $this->middleware(['permission:job update'])->only(['edit', 'update', 'changeStatus']);
+        $this->middleware(['permission:job delete'])->only(['destroy']);
+    }
 
     /**
      * Display a listing of the resource.

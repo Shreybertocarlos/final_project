@@ -16,8 +16,11 @@ class LanguageController extends Controller
 {
     use Searchable;
 
-
-
+    function __construct()
+    {
+        $this->middleware(['permission:job attributes']);
+    }
+    
     /**
      * Display a listing of the resource.
      */
@@ -28,7 +31,6 @@ class LanguageController extends Controller
         $languages = $query->paginate(20);
 
         return view('admin.language.index', compact('languages'));
-
     }
 
     /**

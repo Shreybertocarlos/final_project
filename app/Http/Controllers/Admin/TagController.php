@@ -15,11 +15,11 @@ class TagController extends Controller
 {
     use Searchable;
 
-    // function __construct()
-    // {
-    //     $this->middleware(['permission:job attributes']);
-    // }
-
+    function __construct()
+    {
+        $this->middleware(['permission:job attributes']);
+    }
+    
     /**
      * Display a listing of the resource.
      */

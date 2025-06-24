@@ -5,7 +5,7 @@
     <div class="section-header">
       <h1>Dashboard</h1>
     </div>
-
+    @if (canAccess(['dashboard analytics']))
     <div class="row">
       <div class="col-lg-3 col-md-6 col-sm-6 col-12">
         <div class="card card-statistic-1">
@@ -128,9 +128,9 @@
         </div>
       </div>
     </div>
+    @endif
 
-
-
+    @if (canAccess(['dashboard pending posts']))
     <div class="col-12">
         <div class="card">
             <div class="card-header">
@@ -197,7 +197,7 @@
                                 <td>{{ formatDate($job->deadline) }}</td>
                                 <td>
                                     @if ($job->status === 'pending')
-                                    <span class="badge bg-warning text-dark">Pending</span>
+                                    <span class="badge bg-warning text-dark">Peinding</span>
                                     @elseif($job->deadline > date('Y-m-d'))
                                         <span class="badge bg-primary text-dark">Active</span>
                                     @else
@@ -237,7 +237,7 @@
             </div>
         </div>
     </div>
-
+    @endif
 
   </section>
 @endsection

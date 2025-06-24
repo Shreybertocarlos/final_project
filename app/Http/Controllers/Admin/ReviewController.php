@@ -16,11 +16,11 @@ class ReviewController extends Controller
 {
     use FileUploadTrait, Searchable;
 
-    // function __construct()
-    // {
-    //     $this->middleware(['permission:sections']);
-    // }
-
+    function __construct()
+    {
+        $this->middleware(['permission:sections']);
+    }
+    
     /**
      * Display a listing of the resource.
      */

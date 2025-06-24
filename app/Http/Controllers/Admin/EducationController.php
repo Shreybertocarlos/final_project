@@ -15,11 +15,11 @@ class EducationController extends Controller
 {
     use Searchable;
 
-    // function __construct()
-    // {
-    //     $this->middleware(['permission:job attributes']);
-    // }
-
+    function __construct()
+    {
+        $this->middleware(['permission:job attributes']);
+    }
+    
     /**
      * Display a listing of the resource.
      */
@@ -91,7 +91,7 @@ class EducationController extends Controller
      */
     public function destroy(string $id)
     {
-        //validation
+        // validation
         $jobExist = Job::where('education_id', $id)->exists();
 
         if($jobExist) {

@@ -13,11 +13,11 @@ class CustomPageBuilderController extends Controller
 {
     use Searchable;
 
-    // function __construct()
-    // {
-    //     $this->middleware(['permission:site pages']);
-    // }
-
+    function __construct()
+    {
+        $this->middleware(['permission:site pages']);
+    }
+    
     /**
      * Display a listing of the resource.
      */

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PaypalSettingUpdateReqeust;
 use App\Http\Requests\Admin\RazorpaySettingUpdateRequest;
@@ -17,11 +16,16 @@ use Illuminate\View\View;
 
 class PaymentSettingController extends Controller
 {
-    //
+    function __construct()
+    {
+        $this->middleware(['permission:payment settings']);
+    }
+
     function index() : View {
 
         return view('admin.payment-setting.index');
     }
+
     function updatePaypalSetting(PaypalSettingUpdateReqeust $request) : RedirectResponse {
 
         $validatedData = $request->validated();
@@ -36,7 +40,6 @@ class PaymentSettingController extends Controller
         $settingsService->clearCachedSettings();
 
         Notify::updatedNotification();
-
 
         return redirect()->back();
     }
@@ -58,6 +61,7 @@ class PaymentSettingController extends Controller
         return redirect()->back();
     }
 
+
     function updateRazorpaySetting(RazorpaySettingUpdateRequest $request) : RedirectResponse {
         $validatedData = $request->validated();
 
@@ -74,5 +78,4 @@ class PaymentSettingController extends Controller
 
         return redirect()->back();
     }
-
 }

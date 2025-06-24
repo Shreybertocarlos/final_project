@@ -30,10 +30,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-            return redirect()->intended(RouteServiceProvider::ADMIN_DASHBOARD);
-
-
-
+        return redirect()->intended(RouteServiceProvider::ADMIN_DASHBOARD);
 
     }
 
@@ -42,7 +39,6 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-
         Auth::guard('admin')->logout();
 
         // $request->session()->invalidate();

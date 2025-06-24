@@ -62,8 +62,6 @@ class PaymentController extends Controller
         // calculate payable amount
         $payableAmount = round(Session::get('selected_plan')['price'] * config('gatewaySettings.paypal_currency_rate'));
 
-
-
         $response = $provider->createOrder([
             'intent' => 'CAPTURE',
             'application_context' => [
@@ -90,8 +88,6 @@ class PaymentController extends Controller
 
     }
 
-
-
     function paypalSuccess(Request $request)
     {
         abort_if(!$this->checkSession(), 404);
@@ -103,8 +99,6 @@ class PaymentController extends Controller
 
         $response = $provider->capturePaymentOrder($request->token);
 
-
-
         if(isset($response['status']) && $response['status'] === 'COMPLETED') {
             $capture = $response['purchase_units'][0]['payments']['captures'][0];
 
@@ -115,7 +109,6 @@ class PaymentController extends Controller
                 OrderService::setUserPlan();
 
                 Session::forget('selected_plan');
-
                 return redirect()->route('company.payment.success');
             }catch(\Exception $e) {
                 logger( 'Payment ERROR >> '. $e);
@@ -131,7 +124,7 @@ class PaymentController extends Controller
         return redirect()->route('company.payment.error')->withErrors(['error' => 'Something went wrong please try again']);
     }
 
-// Pay with Stripe
+    // Pay with Stripe
     function payWithStripe() {
         abort_if(!$this->checkSession(), 404);
 

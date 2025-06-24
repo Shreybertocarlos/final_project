@@ -1,4 +1,4 @@
-@extends('frontend.layouts.master')
+{{-- @extends('frontend.layouts.master')
 @section('contents')
     <section class="section-box mt-75">
         <div class="breacrumb-cover">
@@ -61,7 +61,7 @@
                                         {{-- <a data-social="linkedin" class="d-inline-block d-middle" href="#"><img
                                                 alt="joblist"
                                                 src="{{ asset('frontend/assets/imgs/template/icons/share-in.svg') }}"></a> --}}
-                                    </div>
+                                    {{-- </div>
                                 </div>
                             </div>
 
@@ -71,4 +71,4 @@
             </div>
         </div>
     </div>
-@endsection
+@endsection --}} 

@@ -17,8 +17,11 @@ class StateController extends Controller
 {
     use Searchable;
 
-   
-
+    function __construct()
+    {
+        $this->middleware(['permission:job locations']);
+    }
+    
     /**
      * Display a listing of the resource.
      */

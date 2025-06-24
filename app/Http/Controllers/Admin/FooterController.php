@@ -12,10 +12,10 @@ class FooterController extends Controller
 {
     use FileUploadTrait;
 
-    // function __construct()
-    // {
-    //     $this->middleware(['permission:site footer']);
-    // }
+    function __construct()
+    {
+        $this->middleware(['permission:site footer']);
+    }
 
     /**
      * Display a listing of the resource.

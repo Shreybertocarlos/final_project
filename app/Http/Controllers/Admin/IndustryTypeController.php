@@ -5,20 +5,25 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\IndustryType;
-use App\Services\Notify ;
+use App\Services\Notify;
 use App\Traits\Searchable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-
 class IndustryTypeController extends Controller
 {
     use Searchable;
+
+
+    function __construct()
+    {
+        $this->middleware(['permission:job attributes']);
+    }
+
     /**
      * Display a listing of the resource.
      */
-
     public function index(Request $request) : View
     {
 
@@ -28,7 +33,6 @@ class IndustryTypeController extends Controller
 
         return view('admin.industry-type.index', compact('industryTypes'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -54,13 +58,7 @@ class IndustryTypeController extends Controller
         Notify::createdNotification();
 
         return to_route('admin.industry-types.index');
-        //
     }
-
-    /**
-     * Display the specified resource.
-     */
-
 
     /**
      * Show the form for editing the specified resource.
@@ -77,7 +75,6 @@ class IndustryTypeController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            //add id when checking for uniquesness
             'name' => ['required', 'max:255', 'unique:industry_types,name,'.$id]
         ]);
 

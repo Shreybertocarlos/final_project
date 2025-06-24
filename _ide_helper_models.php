@@ -51,11 +51,17 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Permission> $permissions
+ * @property-read int|null $permissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Role> $roles
+ * @property-read int|null $roles_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @method static \Illuminate\Database\Eloquent\Builder|Admin newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Admin newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin permission($permissions, $without = false)
  * @method static \Illuminate\Database\Eloquent\Builder|Admin query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin role($roles, $guard = null, $without = false)
  * @method static \Illuminate\Database\Eloquent\Builder|Admin whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Admin whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Admin whereEmailVerifiedAt($value)
@@ -65,6 +71,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Admin wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Admin whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Admin whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin withoutPermission($permissions)
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin withoutRole($roles, $guard = null)
  */
 	class Admin extends \Eloquent {}
 }
@@ -555,9 +563,21 @@ namespace App\Models{
 /**
  * 
  *
+ * @property int $id
+ * @property string $logo
+ * @property string $copyright
+ * @property string $details
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Footer newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Footer newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Footer query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Footer whereCopyright($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Footer whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Footer whereDetails($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Footer whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Footer whereLogo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Footer whereUpdatedAt($value)
  */
 	class Footer extends \Eloquent {}
 }
@@ -1218,6 +1238,27 @@ namespace App\Models{
  * 
  *
  * @property int $id
+ * @property string $icon
+ * @property string $url
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialIcon newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialIcon newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialIcon query()
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialIcon whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialIcon whereIcon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialIcon whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialIcon whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialIcon whereUrl($value)
+ */
+	class SocialIcon extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
  * @property string $name
  * @property int $country_id
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -1304,35 +1345,42 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $name
+ * @property string $image
  * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property string $role
  * @property mixed $password
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Candidate|null $candidateProfile
+ * @property-read \App\Models\Company|null $company
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Permission> $permissions
+ * @property-read int|null $permissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Role> $roles
+ * @property-read int|null $roles_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User permission($permissions, $without = false)
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null, $without = false)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
- * @mixin \Eloquent
- * @property string $image
- * @property string $role
- * @property-read \App\Models\Candidate|null $candidateProfile
- * @property-read \App\Models\Company|null $company
- * @method static \Illuminate\Database\Eloquent\Builder|User whereImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRole($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User withoutPermission($permissions)
+ * @method static \Illuminate\Database\Eloquent\Builder|User withoutRole($roles, $guard = null)
  */
 	class User extends \Eloquent {}
 }

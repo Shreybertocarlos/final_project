@@ -15,10 +15,10 @@ class NewsletterController extends Controller
 {
     use Searchable;
 
-    // function __construct()
-    // {
-    //     $this->middleware(['permission:news letter']);
-    // }
+    function __construct()
+    {
+        $this->middleware(['permission:news letter']);
+    }
 
     function index() : View {
 

@@ -16,7 +16,10 @@ class OrderController extends Controller
 {
     use Searchable;
 
-  
+    function __construct()
+    {
+        $this->middleware(['permission:order index']);
+    }
 
 
     function index() : View {
