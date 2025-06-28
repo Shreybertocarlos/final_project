@@ -14,7 +14,7 @@ class BM25Service
         $results = [];
 
         foreach ($queryTerms as $term) {
-            $indexedTerms = DB::table('job_search_index')->where('term', $term)->get();
+            $indexedTerms = DB::table('rank')->where('term', $term)->get();
 
             foreach ($indexedTerms as $indexedTerm) {
                 $jobId = $indexedTerm->job_id;
