@@ -10,6 +10,7 @@ use App\Models\Job;
 use App\Models\JobCategory;
 use App\Models\JobType;
 use App\Models\State;
+use App\Services\JobSearchService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
@@ -17,6 +18,13 @@ use Illuminate\View\View;
 
 class FrontendJobPageController extends Controller
 {
+    protected $jobSearchService;
+
+    public function __construct(JobSearchService $jobSearchService)
+    {
+        $this->jobSearchService = $jobSearchService;
+    }
+
     function index(Request $request) : View {
 
         $countries = Country::all();
@@ -27,45 +35,26 @@ class FrontendJobPageController extends Controller
         $selectedStates = null;
         $selectedCites = null;
 
+        // Prepare filters array for enhanced search
+        $filters = [
+            'country' => $request->country,
+            'state' => $request->state,
+            'city' => $request->city,
+            'category' => $request->category,
+            'min_salary' => $request->min_salary,
+            'jobtype' => $request->jobtype,
+        ];
 
-        $query = Job::query();
-        $query->where(['status' => 'active'])
-        ->where('deadline', '>=', date('Y-m-d'));
+        // Use enhanced search service (BM25 + traditional)
+        $jobs = $this->jobSearchService->search($request->search, $filters);
 
-        if($request->has('search') && $request->filled('search')) {
-            $query->where('title', 'like', '%'. $request->search . '%');
-        }
+        // Handle state and city loading for dropdowns (existing logic)
         if($request->has('country') && $request->filled('country')) {
-            $query->where('country_id', $request->country);
+            $selectedStates = State::where('country_id', $request->country)->get();
         }
         if($request->has('state') && $request->filled('state')) {
-            $query->where('state_id', $request->state);
-            $selectedStates = State::where('country_id', $request->country)->get();
             $selectedCites = City::where('state_id', $request->state)->get();
-
         }
-        if($request->has('city') && $request->filled('city')) {
-            $query->where('city_id', $request->city);
-        }
-
-        if($request->has('category') && $request->filled('category')) {
-            if(is_array($request->category)){
-                $categoryIds = JobCategory::whereIn('slug', $request->category)->pluck('id')->toArray();
-                $query->whereIn('job_category_id', $categoryIds);
-            }else {
-                $category = JobCategory::where('slug', $request->category)->first();
-                $query->where('job_category_id', $category->id);
-            }
-        }
-        if($request->has('min_salary') && $request->filled('min_salary') && $request->min_salary > 0) {
-            $query->where('min_salary', '>=', $request->min_salary)->orWhere('max_salary', '>=', $request->min_salary);
-        }
-        if($request->has('jobtype') && $request->filled('jobtype')) {
-            $typeIds = JobType::whereIn('slug', $request->jobtype)->pluck('id')->toArray();
-            $query->whereIn('job_type_id', $typeIds);
-        }
-
-        $jobs = $query->paginate(8);
 
 
 

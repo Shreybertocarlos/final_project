@@ -5,7 +5,6 @@ namespace App\Providers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,6 +16,15 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        'eloquent.created: App\Models\Job' => [
+            'App\Listeners\JobIndexListener@created',
+        ],
+        'eloquent.updated: App\Models\Job' => [
+            'App\Listeners\JobIndexListener@updated',
+        ],
+        'eloquent.deleted: App\Models\Job' => [
+            'App\Listeners\JobIndexListener@deleted',
         ],
     ];
 
