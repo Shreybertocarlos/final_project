@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\OrderService;
+use App\Services\Khalti;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
-use phpDocumentor\Reflection\Types\Boolean;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Stripe\Stripe;
 use Stripe\Checkout\Session as StripeSession;
@@ -223,6 +223,69 @@ class PaymentController extends Controller
         }
     }
 
+    // Khalti Payment Methods
+    function khaltiRedirect() : View {
+        abort_if(!$this->checkSession(), 404);
+        return view('frontend.pages.khalti-redirect');
+    }
+
+    function payWithKhalti(Request $request) {
+        abort_if(!$this->checkSession(), 404);
+
+        $khalti = new Khalti();
+        $khalti->byCustomer(
+            auth()->user()->company->name,
+            auth()->user()->company->email,
+            auth()->user()->company->phone ?? '9800000000'
+        );
+
+        return $khalti->pay(
+            session('selected_plan')['price'],
+            route('company.khalti.success'),
+            uniqid('khalti_'),
+            session('selected_plan')['label'] . ' Plan'
+        );
+    }
+
+    function khaltiSuccess(Request $request) {
+        abort_if(!$this->checkSession(), 404);
+
+        if (!$request->has('pidx')) {
+            return redirect()->route('company.payment.error')
+                ->withErrors(['error' => 'Transaction ID missing']);
+        }
+
+        $khalti = new Khalti();
+        $inquiry = $khalti->inquiry($request->pidx);
+
+        if ($khalti->isSuccess($inquiry)) {
+            try {
+                // Use the amount from the payment inquiry (which now matches the plan amount)
+                // Convert from paisa to rupees
+                $amount = $khalti->requestedAmount($inquiry) / 100;
+
+                OrderService::storeOrder(
+                    $request->pidx,
+                    'khalti',
+                    $amount,
+                    config('gatewaySettings.khalti_currency_name', 'NPR'),
+                    'paid'
+                );
+
+                OrderService::setUserPlan();
+
+                Session::forget('selected_plan');
+                return redirect()->route('company.payment.success');
+            } catch(\Exception $e) {
+                logger('Khalti Payment ERROR >> '. $e);
+                return redirect()->route('company.payment.error')
+                    ->withErrors(['error' => 'Payment processing failed']);
+            }
+        } else {
+            return redirect()->route('company.payment.error')
+                ->withErrors(['error' => 'Payment verification failed']);
+        }
+    }
 
     /** check session for selected plan */
     function checkSession() : bool {

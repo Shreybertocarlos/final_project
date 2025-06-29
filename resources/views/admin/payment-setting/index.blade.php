@@ -25,6 +25,9 @@
                         <li class="nav-item">
                           <a class="nav-link" id="contact-tab4" data-toggle="tab" href="#contact4" role="tab" aria-controls="contact" aria-selected="false">Razorpay</a>
                         </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="khalti-tab4" data-toggle="tab" href="#khalti4" role="tab" aria-controls="khalti" aria-selected="false">Khalti</a>
+                        </li>
                       </ul>
                     </div>
                     <div class="col-12 col-sm-12 col-md-10">
@@ -35,6 +38,8 @@
                         @include('admin.payment-setting.sections.stripe-section')
 
                         @include('admin.payment-setting.sections.razorpay-section')
+
+                        @include('admin.payment-setting.sections.khalti-section')
 
                       </div>
                     </div>

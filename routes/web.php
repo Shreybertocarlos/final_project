@@ -156,5 +156,9 @@ Route::group(
 
      Route::get('razorpay-redirect', [PaymentController::class, 'razorpayRedirect'])->name('razorpay-redirect');
      Route::post('razorpay/payment', [PaymentController::class, 'payWithRazorpay'])->name('razorpay.payment');
+
+     Route::get('khalti-redirect', [PaymentController::class, 'khaltiRedirect'])->name('khalti-redirect');
+     Route::get('khalti/payment', [PaymentController::class, 'payWithKhalti'])->name('khalti.payment');
+     Route::get('khalti/success', [PaymentController::class, 'khaltiSuccess'])->name('khalti.success');
     }
 );
