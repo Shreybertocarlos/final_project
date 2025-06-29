@@ -9,7 +9,7 @@
             <h2 class="mb-20">Job Details</h2>
             <ul class="breadcrumbs">
               <li><a class="home-icon" href="{{ url('/') }}">Home</a></li>
-              <li>job Detatils</li>
+              <li>Job Details</li>
             </ul>
           </div>
         </div>
@@ -218,8 +218,8 @@
                     notyf.success(response.message);
                 },
                 error: function(xhr, status, error) {
-                    let erorrs = xhr.responseJSON.errors;
-                    $.each(erorrs, function(index, value) {
+                    let errors = xhr.responseJSON.errors;
+                    $.each(errors, function(index, value) {
                         notyf.error(value[index]);
                     });
                 }

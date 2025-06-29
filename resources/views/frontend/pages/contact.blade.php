@@ -96,9 +96,9 @@
                     notyf.success(response.message);
                 },
                 error: function(xhr, status, error) {
-                    let erorrs = xhr.responseJSON.errors;
+                    let errors = xhr.responseJSON.errors;
                     console.log(xhr)
-                    $.each(erorrs, function(index, value) {
+                    $.each(errors, function(index, value) {
                         notyf.error(value[0]);
                     });
                     button.text("Send message");

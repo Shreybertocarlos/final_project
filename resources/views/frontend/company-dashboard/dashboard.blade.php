@@ -55,7 +55,7 @@
                                                 <img src="{{ asset(auth()->user()->image) }}" alt="alert">
                                             </span>
                                             <div class="text">
-                                                <h4>WORNING: You have to complete your company profile first!</h4>
+                                                <h4>WARNING: You have to complete your company profile first!</h4>
                                                 <p>Please complete your company profile to use all the features.</p>
                                             </div>
                                             <a href="{{ route('company.profile') }}" class="btn btn-default rounded-1">Edit Profile</a>

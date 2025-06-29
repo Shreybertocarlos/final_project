@@ -340,7 +340,7 @@
             $('.city').html("");
 
             $.ajax({
-                mehtod: 'GET',
+                method: 'GET',
                 url: '{{ route("get-states", ":id") }}'.replace(":id", country_id),
                 data: {},
                 success: function(response) {
