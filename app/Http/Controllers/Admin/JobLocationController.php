@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\JobLocationCreateRequest;
 use App\Http\Requests\Admin\JobLocationUpdateRequest;
-use App\Models\Country;
+use App\Models\City;
 use App\Models\JobLocation;
 use App\Services\Notify;
 use App\Traits\FileUploadTrait;
@@ -36,9 +36,9 @@ class JobLocationController extends Controller
      */
     public function create() : View
     {
-        $countries = Country::all();
+        $cities = City::with('state')->orderBy('name')->get();
 
-        return view('admin.job-location.create', compact('countries'));
+        return view('admin.job-location.create', compact('cities'));
     }
 
     /**
@@ -50,7 +50,7 @@ class JobLocationController extends Controller
 
         $location = new JobLocation();
         $location->image = $imagePath;
-        $location->country_id = $request->country;
+        $location->city_id = $request->city;
         $location->status = $request->status;
         $location->save();
 
@@ -66,8 +66,8 @@ class JobLocationController extends Controller
     public function edit(string $id)
     {
         $location = JobLocation::findOrFail($id);
-        $countries = Country::all();
-        return view('admin.job-location.edit', compact('location', 'countries'));
+        $cities = City::with('state')->orderBy('name')->get();
+        return view('admin.job-location.edit', compact('location', 'cities'));
     }
 
     /**
@@ -79,7 +79,7 @@ class JobLocationController extends Controller
 
         $location = JobLocation::findOrFail($id);
         if(!empty($imagePath)) $location->image = $imagePath;
-        $location->country_id = $request->country;
+        $location->city_id = $request->city;
         $location->status = $request->status;
         $location->save();
 

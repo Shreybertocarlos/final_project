@@ -27,15 +27,15 @@
 
                             </div>
                             <div class="form-group">
-                                <label for="">Country</label>
-                                <select name="country" id="" class="form-control select2 {{ hasError($errors, 'country') }}">
+                                <label for="">City</label>
+                                <select name="city" id="" class="form-control select2 {{ hasError($errors, 'city') }}">
                                     <option value="">choose</option>
-                                    @foreach ($countries as $country)
-                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                    @foreach ($cities as $city)
+                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
 
                                     @endforeach
                                 </select>
-                                <x-input-error :messages="$errors->get('country')" class="mt-2" />
+                                <x-input-error :messages="$errors->get('city')" class="mt-2" />
                             </div>
                             <div class="form-group">
                                 <label for="">Status</label>

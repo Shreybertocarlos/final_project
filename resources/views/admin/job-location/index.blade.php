@@ -12,7 +12,7 @@
                     <div class="card-header">
                         <h4>All Locations</h4>
                         <div class="card-header-form">
-                            
+
                         </div>
                         <a href="{{ route('admin.job-location.create') }}" class="btn btn-primary"> <i class="fas fa-plus-circle"></i> Create new</a>
                     </div>
@@ -29,7 +29,7 @@
                                 @forelse ($locations as $location)
                                     <tr>
                                         <td><img src="{{ asset($location->image) }}" style="height: 60px; width=100px; object-fit:cover" alt=""></td>
-                                        <td>{{ $location->country->name }}</td>
+                                        <td>{{ $location->city->name }}</td>
                                         <td>
                                             <span class="badge badge-primary">{{ $location->status }}</span>
                                         </td>

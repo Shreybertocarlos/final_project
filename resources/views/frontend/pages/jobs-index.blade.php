@@ -136,29 +136,14 @@
                                     <input type="text" value="{{ request()?->search }}" class="form-control" name="search" placeholder="Search">
                                 </div>
                             </div>
-                            <div class="filter-block mb-20">
-                                <div class="form-group select-style">
-                                    <select name="country" class="form-control country form-icons select-active">
-                                        <option value="">Country</option>
-                                        <option value="">All</option>
-                                        @foreach ($countries as $country)
-                                        <option @selected(request()?->country == $country->id) value="{{ $country->id }}">{{ $country->name }}</option>
-                                        @endforeach
-
-                                    </select>
-                                </div>
-                            </div>
+                            <!-- Country filter removed - focusing on local Nepalese locations only -->
                             <div class="filter-block mb-20">
                                 <div class="form-group select-style">
                                     <select name="state" class="form-control state form-icons select-active">
-                                        @if ($selectedStates)
-                                            <option value="">All</option>
-                                            @foreach ($selectedStates as $state)
-                                                <option @selected($state->id == request()->state) value="{{ $state->id }}" >{{ $state->name }}</option>
-                                            @endforeach
-                                        @else
-                                            <option value="" >State</option>
-                                        @endif
+                                        <option value="">State</option>
+                                        @foreach ($states as $state)
+                                            <option @selected($state->id == request()->state) value="{{ $state->id }}" >{{ $state->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -255,29 +240,7 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        $('.country').on('change', function() {
-            let country_id = $(this).val();
-            // remove all previous cities
-            $('.city').html("");
-
-            $.ajax({
-                mehtod: 'GET',
-                url: '{{ route("get-states", ":id") }}'.replace(":id", country_id),
-                data: {},
-                success: function(response) {
-                    let html = '';
-
-                    $.each(response, function(index, value) {
-                        html += `<option value="${value.id}" >${value.name}</option>`
-                    });
-
-                    html = `<option value="" >Choose</option>` + html;
-
-                    $('.state').html(html);
-                },
-                error: function(xhr, status, error) {}
-            })
-        })
+        // Country selection removed - using all states by default
 
         // get cities
         $('.state').on('change', function() {

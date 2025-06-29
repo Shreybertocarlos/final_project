@@ -28,10 +28,10 @@
 
                       </select>
                     </div>
-                    <select class="form-input mr-10 select-active" name="country">
+                    <select class="form-input mr-10 select-active" name="city">
                       <option value="">Location</option>
-                      @foreach ($countries as $country)
-                        <option value="{{ $country->id }}">{{ $country->name }}</option>
+                      @foreach ($cities as $city)
+                        <option value="{{ $city->id }}">{{ $city->name }}</option>
 
                       @endforeach
                     </select>

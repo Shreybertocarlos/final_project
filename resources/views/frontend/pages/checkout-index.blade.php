@@ -8,7 +8,7 @@
                     <div class="col-lg-12">
                         <h2 class="mb-20">Check Out</h2>
                         <ul class="breadcrumbs">
-                            <li><a class="home-icon" href="index.html">Home</a></li>
+                            <li><a class="home-icon" href="{{ url('/') }}">Home</a></li>
                             <li>Check Out</li>
                         </ul>
                     </div>
@@ -65,7 +65,7 @@
                             <div class="box-pricing-item">
                                 <h3>{{ $plan->label }}</h3>
                                 <div class="box-info-price"><span
-                                        class="text-price color-brand-2">${{ $plan->price }}</span></div>
+                                        class="text-price color-brand-2">Rs {{ $plan->price }}</span></div>
                                 <ul class="list-package-feature">
                                     <li>{{ $plan->job_limit }} Job Limit</li>
                                     <li>{{ $plan->featured_job_limit }} Featured Job Limit</li>

@@ -16,7 +16,7 @@ class JobLocationUpdateRequest extends FormRequest
     {
         return [
             'image' => ['nullable', 'image', 'max:3000'],
-            'country' => ['required', 'numeric'],
+            'city' => ['required', 'numeric'],
             'status' => ['required']
         ];
     }

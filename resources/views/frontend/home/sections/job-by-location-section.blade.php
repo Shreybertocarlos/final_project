@@ -11,17 +11,17 @@
         <div class="row mt-50">
             @foreach ($locations as $location)
                 <div class="col-xl-3 col-lg-3 col-md-5 col-sm-12 col-12">
-                    <div class="card-image-top hover-up"><a href="{{ route('companies.index', ['country' => $location->country_id]) }}">
+                    <div class="card-image-top hover-up"><a href="{{ route('companies.index', ['city' => $location->city_id]) }}">
                             <div class="image" style="background-image: url({{ asset($location->image) }});"><span
                                     class="lbl-hot">{{ $location->status }}</span></div>
                         </a>
                         <div class="informations">
-                            <a href="{{ route('companies.index', ['country' => $location->country_id]) }}">
-                                <h5>{{ $location->country->name }}</h5>
+                            <a href="{{ route('companies.index', ['city' => $location->city_id]) }}">
+                                <h5>{{ $location->city->name }}</h5>
                             </a>
                             <div class="row">
                                 <div class="col-lg-6 col-6"><span
-                                        class="text-14 color-text-paragraph-2">{{ $location->country->companies->count() }}
+                                        class="text-14 color-text-paragraph-2">{{ $location->city->companies->count() }}
                                         companies</span></div>
                                 <div class="col-lg-6 col-6 text-end"><span
                                         class="color-text-paragraph-2 text-14"></span>

@@ -173,6 +173,7 @@ namespace App\Models{
  * @property string|null $phone_two
  * @property string|null $email
  * @property string|null $cv
+ * @property string|null $cv_text
  * @property string|null $bio
  * @property string|null $marital_status
  * @property string|null $birth_date
@@ -209,6 +210,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereCountry($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereCv($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereCvText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereExperienceId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereFullName($value)
@@ -347,6 +349,8 @@ namespace App\Models{
  * @property int $country_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Company> $companies
+ * @property-read int|null $companies_count
  * @property-read \App\Models\Country|null $country
  * @property-read \App\Models\State|null $state
  * @method static \Illuminate\Database\Eloquent\Builder|City newModelQuery()
@@ -838,15 +842,15 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $image
- * @property int $country_id
+ * @property int $city_id
  * @property string|null $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Country|null $country
+ * @property-read \App\Models\City|null $city
  * @method static \Illuminate\Database\Eloquent\Builder|JobLocation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JobLocation newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JobLocation query()
- * @method static \Illuminate\Database\Eloquent\Builder|JobLocation whereCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobLocation whereCityId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobLocation whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobLocation whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobLocation whereImage($value)

@@ -10,7 +10,9 @@ class JobLocation extends Model
 {
     use HasFactory;
 
-    function country() : BelongsTo {
-        return $this->belongsTo(Country::class);
+    protected $fillable = ['image', 'city_id', 'status'];
+
+    function city() : BelongsTo {
+        return $this->belongsTo(City::class);
     }
 }

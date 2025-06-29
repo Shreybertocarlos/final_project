@@ -33,7 +33,7 @@
                                     <h4>{{ $plan->label }}</h4>
                                 </div>
                                 <div class="pricing-price">
-                                    <div>${{ $plan->price }}</div>
+                                    <div>Rs {{ $plan->price }}</div>
                                 </div>
                                 <div class="pricing-details">
                                     <div class="pricing-item">

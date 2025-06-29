@@ -140,9 +140,7 @@ class JobSearchService
      */
     protected function applyFilters($query, array $filters)
     {
-        if (!empty($filters['country'])) {
-            $query->where('country_id', $filters['country']);
-        }
+        // Country filtering removed - focusing on local Nepalese locations only
 
         if (!empty($filters['state'])) {
             $query->where('state_id', $filters['state']);

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\AppliedJob;
 use App\Models\City;
-use App\Models\Country;
+
 use App\Models\Job;
 use App\Models\JobCategory;
 use App\Models\JobType;
@@ -27,7 +27,7 @@ class FrontendJobPageController extends Controller
 
     function index(Request $request) : View {
 
-        $countries = Country::all();
+        $states = State::all();
         $jobCategories = JobCategory::withCount(['jobs' => function($query) {
             $query->where('status', 'active')->where('deadline', '>=', date('Y-m-d'));
         }])->get();
@@ -37,7 +37,6 @@ class FrontendJobPageController extends Controller
 
         // Prepare filters array for enhanced search
         $filters = [
-            'country' => $request->country,
             'state' => $request->state,
             'city' => $request->city,
             'category' => $request->category,
@@ -48,17 +47,14 @@ class FrontendJobPageController extends Controller
         // Use enhanced search service (BM25 + traditional)
         $jobs = $this->jobSearchService->search($request->search, $filters);
 
-        // Handle state and city loading for dropdowns (existing logic)
-        if($request->has('country') && $request->filled('country')) {
-            $selectedStates = State::where('country_id', $request->country)->get();
-        }
+        // Handle city loading for dropdowns (simplified logic)
         if($request->has('state') && $request->filled('state')) {
             $selectedCites = City::where('state_id', $request->state)->get();
         }
 
 
 
-        return view('frontend.pages.jobs-index', compact('jobs', 'countries', 'jobCategories', 'jobTypes', 'selectedStates', 'selectedCites'));
+        return view('frontend.pages.jobs-index', compact('jobs', 'states', 'jobCategories', 'jobTypes', 'selectedCites'));
     }
 
     function show(string $slug) : View {

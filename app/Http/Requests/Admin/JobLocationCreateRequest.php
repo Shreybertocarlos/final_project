@@ -16,7 +16,7 @@ class JobLocationCreateRequest extends FormRequest
     {
         return [
             'image' => ['required', 'image', 'max:3000'],
-            'country' => ['required', 'numeric'],
+            'city' => ['required', 'numeric'],
             'status' => ['required']
         ];
     }
