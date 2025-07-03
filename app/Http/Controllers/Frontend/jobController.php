@@ -10,7 +10,7 @@ use App\Models\City;
 use App\Models\Company;
 use App\Models\Country;
 use App\Models\Education;
-use App\Models\Experience;
+use App\Models\JobExperience;
 use App\Models\Job;
 use App\Models\JobBenefits;
 use App\Models\JobCategory;
@@ -66,7 +66,7 @@ class jobController extends Controller
         $categories = JobCategory::all();
         $countries = Country::all();
         $salaryTypes = SalaryType::all();
-        $experiences = Experience::all();
+        $experiences = JobExperience::all();
         $jobRoles = JobRole::all();
         $educations = Education::all();
         $jobTypes = JobType::all();
@@ -196,7 +196,7 @@ class jobController extends Controller
         $states = State::where('country_id', $job->country_id)->get();
         $cities = City::where('state_id', $job->state_id)->get();
         $salaryTypes = SalaryType::all();
-        $experiences = Experience::all();
+        $experiences = JobExperience::all();
         $jobRoles = JobRole::all();
         $educations = Education::all();
         $jobTypes = JobType::all();

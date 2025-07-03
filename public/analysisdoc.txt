@@ -1,0 +1,18 @@
+To analyze the application&#39;s architecture, several UML diagrams were developed to highlight
+different aspects of the system. These include class diagram, object diagram, sequence
+diagram, activity diagram, and state diagram. By examining these diagrams, it becomes clear
+that the application follows an object-oriented programming (OOP) paradigm rather than a
+structured programming approach.
+This object-oriented design is also reflected in the choice of technologies. Next.js employs a
+component-based architecture where each part of the user interface is treated as an
+independent object with its own data and logic. Components such as Dashboard, Decks &amp;
+Cards, and Study Tools handle their own state and rendering behavior, demonstrating key
+OOP principles like encapsulation and modularity. The component diagram illustrates how
+these elements interact with each other and with backend services.On the backend, FastAPI
+leverages Python’s object-oriented features by using class-based route handlers and Pydantic
+models. These models define core entities such as Users, Decks, and Cards as objects that
+combine both data and related functionality. This contrasts with structured programming,
+where data and logic are typically separated.
+The following section presents the UML diagrams along with brief interpretations, showing
+how users interact with the system from logging in to managing decks, studying content, and
+viewing performance analytics within an object-oriented structure.
