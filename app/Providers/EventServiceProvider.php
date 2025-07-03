@@ -17,6 +17,7 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        // Job indexing events (existing)
         'eloquent.created: App\Models\Job' => [
             'App\Listeners\JobIndexListener@created',
         ],
@@ -25,6 +26,43 @@ class EventServiceProvider extends ServiceProvider
         ],
         'eloquent.deleted: App\Models\Job' => [
             'App\Listeners\JobIndexListener@deleted',
+        ],
+        // Candidate indexing events (new)
+        'eloquent.created: App\Models\Candidate' => [
+            'App\Listeners\CandidateIndexListener@created',
+        ],
+        'eloquent.updated: App\Models\Candidate' => [
+            'App\Listeners\CandidateIndexListener@updated',
+        ],
+        'eloquent.deleted: App\Models\Candidate' => [
+            'App\Listeners\CandidateIndexListener@deleted',
+        ],
+        // Candidate skill events (trigger reindexing)
+        'eloquent.created: App\Models\CandidateSkill' => [
+            'App\Listeners\CandidateIndexListener@skillChanged',
+        ],
+        'eloquent.deleted: App\Models\CandidateSkill' => [
+            'App\Listeners\CandidateIndexListener@skillChanged',
+        ],
+        // Candidate experience events (trigger reindexing)
+        'eloquent.created: App\Models\CandidateExperience' => [
+            'App\Listeners\CandidateIndexListener@experienceChanged',
+        ],
+        'eloquent.updated: App\Models\CandidateExperience' => [
+            'App\Listeners\CandidateIndexListener@experienceChanged',
+        ],
+        'eloquent.deleted: App\Models\CandidateExperience' => [
+            'App\Listeners\CandidateIndexListener@experienceChanged',
+        ],
+        // Candidate education events (trigger reindexing)
+        'eloquent.created: App\Models\CandidateEducation' => [
+            'App\Listeners\CandidateIndexListener@educationChanged',
+        ],
+        'eloquent.updated: App\Models\CandidateEducation' => [
+            'App\Listeners\CandidateIndexListener@educationChanged',
+        ],
+        'eloquent.deleted: App\Models\CandidateEducation' => [
+            'App\Listeners\CandidateIndexListener@educationChanged',
         ],
     ];
 

@@ -23,6 +23,7 @@ use App\Models\Skill;
 use App\Models\State;
 use App\Models\Tag;
 use App\Services\Notify;
+use App\Services\CandidateRankingService;
 use App\Traits\Searchable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -48,8 +49,26 @@ class jobController extends Controller
                                   ->where('job_id', $id)
                                   ->paginate(20);
 
-        $jobTitle = Job::select('title')->where('id', $id)->first();
+        $jobTitle = Job::select('id', 'title')->where('id', $id)->first();
         return view('frontend.company-dashboard.applications.index', compact('applications', 'jobTitle'));
+    }
+
+    /**
+     * Rank applicants for a specific job using BM25 algorithm
+     */
+    function rankApplicants(string $id, CandidateRankingService $rankingService) : View {
+        // Verify job belongs to authenticated company
+        $job = Job::where('id', $id)
+                  ->where('company_id', auth()->user()->company->id)
+                  ->firstOrFail();
+
+        // Get ranked applicants using BM25 algorithm
+        $rankedApplications = $rankingService->rankApplicantsForJob($id);
+
+        // Get ranking statistics
+        $rankingStats = $rankingService->getRankingStatistics($id);
+
+        return view('frontend.company-dashboard.applications.ranked', compact('rankedApplications', 'job', 'rankingStats'));
     }
 
     /**

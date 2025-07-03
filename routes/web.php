@@ -140,6 +140,7 @@ Route::group(
 
       /** Job Routes */
      Route::get('applications/{id}', [FrontendJobController::class, 'applications'])->name('job.applications');
+     Route::get('applications/{id}/rank', [FrontendJobController::class, 'rankApplicants'])->name('job.applications.rank');
      Route::resource('jobs', FrontendJobController::class);
 
      /**Payment Routes */

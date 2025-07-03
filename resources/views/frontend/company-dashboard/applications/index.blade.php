@@ -23,15 +23,18 @@
             @include('frontend.company-dashboard.sidebar')
             <div class="col-lg-9 col-md-8 col-sm-12 col-12 mb-50">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between align-items-center">
                         <h4>{{ $jobTitle->title }}</h4>
-
+                        <a href="{{ route('company.job.applications.rank', $jobTitle->id) }}"
+                           class="btn btn-success">
+                            <i class="fas fa-sort-amount-down"></i> Rank Applicants
+                        </a>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <tr>
-                                    <th >Details</th>
+                                    <th>Details</th>
                                     <th>Experience</th>
                                     <th style="width: 20%">Action</th>
                                 </tr>
