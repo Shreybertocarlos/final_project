@@ -22,5 +22,15 @@ class DatabaseSeeder extends Seeder
         $this->call([
             JobExperienceSeeder::class,
         ]);
+
+        // Nepal Demo Data Seeders (only in local/staging environments)
+        if (app()->environment(['local', 'staging'])) {
+            $this->call([
+                NepalDemoCompanySeeder::class,
+                NepalDemoCandidateSeeder::class,
+                NepalDemoJobSeeder::class,
+                NepalDemoApplicationSeeder::class,
+            ]);
+        }
     }
 }

@@ -44,7 +44,9 @@ class jobController extends Controller
     }
 
     function applications(string $id) : View {
-        $applications = AppliedJob::where('job_id', $id)->paginate(20);
+        $applications = AppliedJob::with(['candidate.experience', 'candidate.profession'])
+                                  ->where('job_id', $id)
+                                  ->paginate(20);
 
         $jobTitle = Job::select('title')->where('id', $id)->first();
         return view('frontend.company-dashboard.applications.index', compact('applications', 'jobTitle'));

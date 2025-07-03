@@ -24,7 +24,7 @@ class FrontendCompanyPageController extends Controller
         $selectedStates = null;
         $selectedCites = null;
 
-        $query = Company::query();
+        $query = Company::with(['industryType', 'organizationType']);
 
         $query->withCount(['jobs' => function($query) {
             $query->where('status', 'active')->where('deadline', '>=', date('Y-m-d'));
@@ -64,8 +64,14 @@ class FrontendCompanyPageController extends Controller
     }
 
     function show(string $slug) : View {
-        $company = Company::where(['profile_completion' => 1, 'visibility' => 1, 'slug' => $slug])->firstOrFail();
-        $openJobs = Job::where('company_id', $company->id)->where('status', 'active')->where('deadline', '>=', date('Y-m-d'))->paginate(10);
+        $company = Company::with(['industryType', 'organizationType', 'teamSize'])
+                          ->where(['profile_completion' => 1, 'visibility' => 1, 'slug' => $slug])
+                          ->firstOrFail();
+        $openJobs = Job::with(['category', 'jobType', 'jobExperience'])
+                       ->where('company_id', $company->id)
+                       ->where('status', 'active')
+                       ->where('deadline', '>=', date('Y-m-d'))
+                       ->paginate(10);
 
         return view('frontend.pages.company-details', compact('company', 'openJobs'));
     }

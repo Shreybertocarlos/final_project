@@ -87,6 +87,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Candidate|null $candidate
+ * @property-read \App\Models\User|null $candidateUser
  * @property-read \App\Models\Job|null $job
  * @method static \Illuminate\Database\Eloquent\Builder|AppliedJob newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AppliedJob newQuery()
@@ -199,6 +200,7 @@ namespace App\Models{
  * @property-read \App\Models\Profession|null $profession
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CandidateSkill> $skills
  * @property-read int|null $skills_count
+ * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Candidate findSimilarSlugs(string $attribute, array $config, string $slug)
  * @method static \Illuminate\Database\Eloquent\Builder|Candidate newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Candidate newQuery()
@@ -405,6 +407,7 @@ namespace App\Models{
  * @property-read int|null $jobs_count
  * @property-read \App\Models\OrganizationType|null $organizationType
  * @property-read \App\Models\TeamSize|null $teamSize
+ * @property-read \App\Models\User $user
  * @property-read \App\Models\UserPlan|null $userPlan
  * @method static \Illuminate\Database\Eloquent\Builder|Company findSimilarSlugs(string $attribute, array $config, string $slug)
  * @method static \Illuminate\Database\Eloquent\Builder|Company newModelQuery()

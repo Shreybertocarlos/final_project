@@ -46,7 +46,7 @@
             @endguest
             @auth
                 @if (auth()->user()->role === 'company')
-                    <a class="btn btn-default btn-shadow ml-40 hover-up" style="width: 200px" href="{{ route('company.dashboard') }}">Company Dashobard</a>
+                    <a class="btn btn-default btn-shadow ml-40 hover-up" style="width: 200px" href="{{ route('company.dashboard') }}">Company Dashboard</a>
                 @elseif(auth()->user()->role === 'candidate')
                     <a class="btn btn-default btn-shadow ml-40 hover-up" style="width: 200px" href="{{ route('candidate.dashboard') }}">Candidate Dashboard</a>
                 @endif

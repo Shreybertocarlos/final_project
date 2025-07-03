@@ -17,7 +17,7 @@ class FrontendCandidatePageController extends Controller
 
         $skills = Skill::all();
         $experiences = Experience::all();
-        $query = Candidate::query();
+        $query = Candidate::with(['profession', 'experience']);
         $query->where(['profile_complete' => 1, 'visibility' => 1]);
 
         if($request->has('skills') && $request->filled('skills')) {
@@ -35,11 +35,13 @@ class FrontendCandidatePageController extends Controller
 
         return view('frontend.pages.candidate-index', compact('candidates', 'skills', 'experiences'));
 
-        
+
     }
 
     function show(string $slug) : View {
-        $candidate = Candidate::where(['profile_complete' => 1, 'visibility' => 1, 'slug' => $slug])->firstOrFail();
+        $candidate = Candidate::with(['profession', 'experience', 'skills.skill', 'languages', 'experiences', 'educations'])
+                            ->where(['profile_complete' => 1, 'visibility' => 1, 'slug' => $slug])
+                            ->firstOrFail();
         return view('frontend.pages.candidate-details', compact('candidate'));
     }
 }

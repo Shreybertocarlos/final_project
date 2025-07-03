@@ -31,10 +31,16 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-12 text-lg-end">
-            @if ($alreadyApplied)
-            <div class="btn btn-apply-icon btn-apply btn-apply-big hover-up apply-now" style="background-color:#8d8c8c" >Applied</div>
+            @if (auth()->check() && auth()->user()->role === 'candidate')
+                @if ($alreadyApplied)
+                <div class="btn btn-apply-icon btn-apply btn-apply-big hover-up apply-now" style="background-color:#8d8c8c" >Applied</div>
+                @else
+                <div class="btn btn-apply-icon btn-apply btn-apply-big hover-up apply-now" >Apply now</div>
+                @endif
+            @elseif (auth()->check() && auth()->user()->role === 'company')
+                <div class="btn btn-apply-icon btn-apply btn-apply-big" style="background-color:#dc3545; color: white;" disabled>Companies cannot apply</div>
             @else
-            <div class="btn btn-apply-icon btn-apply btn-apply-big hover-up apply-now" >Apply now</div>
+                <a href="{{ route('login') }}" class="btn btn-apply-icon btn-apply btn-apply-big hover-up">Login to Apply</a>
             @endif
         </div>
       </div>
@@ -206,6 +212,7 @@
 @push('scripts')
   <script>
     $(document).ready(function() {
+        @if (auth()->check() && auth()->user()->role === 'candidate')
         $('.apply-now').on('click', function() {
             $.ajax({
                 method: 'POST',
@@ -225,6 +232,7 @@
                 }
             })
         })
+        @endif
     })
   </script>
 @endpush
