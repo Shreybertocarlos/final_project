@@ -65,7 +65,8 @@
                                         <th>Company</th>
                                         <th>Salary</th>
                                         <th>Date</th>
-                                        <th>Status</th>
+                                        <th>Job Status</th>
+                                        <th>Application Status</th>
                                         <th style="width: 15%">Action</th>
                                     </tr>
                                 </thead>
@@ -97,6 +98,16 @@
                                                 @else
                                                 <span class="badge bg-success">Active</span>
 
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <span class="badge {{ $appliedJob->status_badge_class }}">
+                                                    {{ $appliedJob->status_label }}
+                                                </span>
+                                                @if($appliedJob->status_updated_at)
+                                                    <br><small class="text-muted">
+                                                        Updated {{ $appliedJob->status_updated_at->diffForHumans() }}
+                                                    </small>
                                                 @endif
                                             </td>
                                             <td>

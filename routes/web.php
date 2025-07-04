@@ -143,6 +143,12 @@ Route::group(
      Route::get('applications/{id}/rank', [FrontendJobController::class, 'rankApplicants'])->name('job.applications.rank');
      Route::resource('jobs', FrontendJobController::class);
 
+     /** Application Status Routes */
+     Route::post('application/status/update', [App\Http\Controllers\Frontend\ApplicationStatusController::class, 'updateStatus'])
+          ->name('application.status.update');
+     Route::get('application/context', [App\Http\Controllers\Frontend\ApplicationStatusController::class, 'getApplicationContext'])
+          ->name('application.context');
+
      /**Payment Routes */
      Route::get('payment/success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
      Route::get('payment/error', [PaymentController::class, 'paymentError'])->name('payment.error');

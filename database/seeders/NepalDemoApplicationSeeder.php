@@ -172,9 +172,16 @@ class NepalDemoApplicationSeeder extends Seeder
         // Determine application date
         $applicationDate = $this->getApplicationDate($job);
         
+        // Randomly assign application status for demo purposes
+        $statuses = ['under_review', 'shortlisted', 'called_for_interview', 'rejected'];
+        $weights = [60, 25, 10, 5]; // Weighted probability
+        $status = $this->getWeightedRandomStatus($statuses, $weights);
+
         AppliedJob::create([
             'job_id' => $job->id,
             'candidate_id' => $candidate->user_id,
+            'application_status' => $status,
+            'status_updated_at' => $status !== 'under_review' ? $applicationDate->copy()->addDays(rand(1, 7)) : null,
             'created_at' => $applicationDate,
             'updated_at' => $applicationDate,
         ]);
@@ -196,5 +203,21 @@ class NepalDemoApplicationSeeder extends Seeder
         
         $randomDays = rand(0, $daysDiff);
         return $jobCreated->copy()->addDays($randomDays)->addHours(rand(0, 23));
+    }
+
+    private function getWeightedRandomStatus(array $statuses, array $weights): string
+    {
+        $totalWeight = array_sum($weights);
+        $random = rand(1, $totalWeight);
+
+        $currentWeight = 0;
+        foreach ($statuses as $index => $status) {
+            $currentWeight += $weights[$index];
+            if ($random <= $currentWeight) {
+                return $status;
+            }
+        }
+
+        return $statuses[0]; // Fallback
     }
 }

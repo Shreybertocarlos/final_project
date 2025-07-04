@@ -32,7 +32,8 @@
                                 <th>Company</th>
                                 <th>Salary</th>
                                 <th>Date</th>
-                                <th>Status</th>
+                                <th>Job Status</th>
+                                <th>Application Status</th>
                                 <th style="width: 15%">Action</th>
                             </tr>
                         </thead>
@@ -67,6 +68,16 @@
                                         @endif
                                     </td>
                                     <td>
+                                        <span class="badge {{ $appliedJob->status_badge_class }}">
+                                            {{ $appliedJob->status_label }}
+                                        </span>
+                                        @if($appliedJob->status_updated_at)
+                                            <br><small class="text-muted">
+                                                Updated {{ $appliedJob->status_updated_at->diffForHumans() }}
+                                            </small>
+                                        @endif
+                                    </td>
+                                    <td>
                                         @if($appliedJob->job->deadline < date('Y-m-d'))
                                         <a href="javascript:;"
                                             class="btn-sm btn btn-secondary" ><i class="fas fa-eye"
@@ -83,7 +94,7 @@
                                 </tr>
                             @empty
                             <tr>
-                                <td colspan="5" class="text-center">No data found!</td>
+                                <td colspan="6" class="text-center">No data found!</td>
                             </tr>
                             @endforelse
 

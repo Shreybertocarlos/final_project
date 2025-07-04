@@ -38,10 +38,28 @@ class FrontendCandidatePageController extends Controller
 
     }
 
-    function show(string $slug) : View {
+    function show(string $slug, Request $request) : View {
         $candidate = Candidate::with(['profession', 'experience', 'skills.skill', 'languages', 'experiences', 'educations'])
                             ->where(['profile_complete' => 1, 'visibility' => 1, 'slug' => $slug])
                             ->firstOrFail();
-        return view('frontend.pages.candidate-details', compact('candidate'));
+
+        // Get job context if viewing from company dashboard
+        $jobId = $request->get('job_id');
+        $application = null;
+        $isCompanyView = false;
+
+        if ($jobId && auth()->check() && auth()->user()->role === 'company') {
+            $application = \App\Models\AppliedJob::where([
+                'candidate_id' => $candidate->user_id,
+                'job_id' => $jobId
+            ])->with('job')->first();
+
+            // Verify company owns the job
+            if ($application && $application->job->company_id === auth()->user()->company->id) {
+                $isCompanyView = true;
+            }
+        }
+
+        return view('frontend.pages.candidate-details', compact('candidate', 'application', 'isCompanyView', 'jobId'));
     }
 }

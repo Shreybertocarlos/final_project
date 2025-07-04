@@ -112,7 +112,7 @@
                                                 </span>
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ route('candidates.show', $application->candidate->slug) }}" 
+                                                <a href="{{ route('candidates.show', ['slug' => $application->candidate->slug, 'job_id' => $job->id]) }}"
                                                    class="btn btn-primary btn-sm">
                                                     <i class="fas fa-eye"></i> View Profile
                                                 </a>

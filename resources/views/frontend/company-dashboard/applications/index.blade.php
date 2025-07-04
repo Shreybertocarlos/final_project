@@ -57,7 +57,7 @@
                                             {{ $application->candidate->experience->name }}
                                         </td>
                                         <td>
-                                            <a href="{{ route('candidates.show', $application->candidate->slug) }}" class="btn btn-primary">View Profile</a>
+                                            <a href="{{ route('candidates.show', ['slug' => $application->candidate->slug, 'job_id' => $jobTitle->id]) }}" class="btn btn-primary">View Profile</a>
                                         </td>
 
                                     </tr>
