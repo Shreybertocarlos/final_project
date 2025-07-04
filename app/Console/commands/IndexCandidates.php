@@ -87,31 +87,35 @@ class IndexCandidates extends Command
         // Collect all text content with weighting strategy
         $content = [];
 
-        // Skills (weight: 3x) - Highest priority for job matching
+        // Job Title (weight: 3.0x) - Highest priority for job matching
+        if ($candidate->title) {
+            $content[] = str_repeat($candidate->title . ' ', 3);
+        }
+
+        // Experience designations (weight: 3.0x) - Job titles from experience
+        foreach ($candidate->experiences as $experience) {
+            if ($experience->designation) {
+                $content[] = str_repeat($experience->designation . ' ', 3);
+            }
+        }
+
+        // Profile Summary (weight: 2.0x) - Bio and professional summary content
+        if ($candidate->bio) {
+            $content[] = str_repeat($candidate->bio . ' ', 2);
+        }
+
+        // Skills Match (weight: 1.5x) - Candidate skills matching job requirements
         foreach ($candidate->skills as $candidateSkill) {
             if ($candidateSkill->skill) {
-                $content[] = str_repeat($candidateSkill->skill->name . ' ', 3);
+                $content[] = $candidateSkill->skill->name . ' ' . substr($candidateSkill->skill->name, 0, (int)(strlen($candidateSkill->skill->name)/2));
             }
         }
 
-        // Current title/designation (weight: 2.5x) - Second priority
-        if ($candidate->title) {
-            $content[] = str_repeat($candidate->title . ' ', 2) . substr($candidate->title, 0, (int)(strlen($candidate->title)/2));
-        }
-
-        // Experience responsibilities and designations (weight: 2x) - Third priority
+        // Experience (weight: 1.5x) - Work experience and responsibilities description
         foreach ($candidate->experiences as $experience) {
             if ($experience->responsibilities) {
-                $content[] = str_repeat(strip_tags($experience->responsibilities) . ' ', 2);
+                $content[] = strip_tags($experience->responsibilities) . ' ' . substr(strip_tags($experience->responsibilities), 0, (int)(strlen(strip_tags($experience->responsibilities))/2));
             }
-            if ($experience->designation) {
-                $content[] = str_repeat($experience->designation . ' ', 2);
-            }
-        }
-
-        // Bio/summary (weight: 1.5x) - Fourth priority
-        if ($candidate->bio) {
-            $content[] = $candidate->bio . ' ' . substr($candidate->bio, 0, (int)(strlen($candidate->bio)/2));
         }
 
         // Education degrees (weight: 1x) - Base weight
@@ -157,23 +161,21 @@ class IndexCandidates extends Command
         // Convert to lowercase and remove special characters
         $text = strtolower(preg_replace('/[^\w\s]/', ' ', $text));
 
-        // Split into terms and filter by length
+        // Split into terms
         $terms = array_filter(explode(' ', $text), function($term) {
             return strlen(trim($term)) >= 2;
         });
 
         // Remove common stop words
-        $stopWords = ['the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'is', 'are', 'was', 'were', 'be', 'been', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should'];
+        $stopWords = ['the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by'];
+        $terms = array_diff($terms, $stopWords);
 
-        return array_values(array_diff($terms, $stopWords));
+        return array_values($terms);
     }
 
     private function updateDocumentFrequencies()
     {
-        $terms = DB::table('candidate_search_index')
-                   ->select('term')
-                   ->distinct()
-                   ->pluck('term');
+        $terms = DB::table('candidate_search_index')->select('term')->distinct()->pluck('term');
 
         foreach ($terms as $term) {
             $docFreq = DB::table('candidate_search_index')
@@ -189,15 +191,15 @@ class IndexCandidates extends Command
 
     private function showIndexStatistics()
     {
-        $totalEntries = DB::table('candidate_search_index')->count();
-        $uniqueTerms = DB::table('candidate_search_index')->distinct('term')->count();
-        $indexedCandidates = DB::table('candidate_search_index')->distinct('candidate_id')->count();
+        $totalCandidates = DB::table('candidate_search_index')->distinct('candidate_id')->count('candidate_id');
+        $totalTerms = DB::table('candidate_search_index')->count();
+        $uniqueTerms = DB::table('candidate_search_index')->distinct('term')->count('term');
         $avgDocLength = DB::table('candidate_search_index')->avg('doc_length');
 
-        $this->info('=== Index Statistics ===');
-        $this->info("Total index entries: {$totalEntries}");
+        $this->info("\n=== Indexing Statistics ===");
+        $this->info("Total indexed candidates: {$totalCandidates}");
+        $this->info("Total term entries: {$totalTerms}");
         $this->info("Unique terms: {$uniqueTerms}");
-        $this->info("Indexed candidates: {$indexedCandidates}");
         $this->info("Average document length: " . round($avgDocLength, 2));
     }
 }

@@ -156,10 +156,10 @@
                             <div class="col-md-6">
                                 <h6>Ranking Criteria:</h6>
                                 <ul class="list-unstyled">
-                                    <li><strong>Skills Match (3x weight):</strong> Candidate skills matching job requirements</li>
-                                    <li><strong>Job Title (2.5x weight):</strong> Relevance of current/past job titles</li>
-                                    <li><strong>Experience (2x weight):</strong> Work experience and responsibilities</li>
-                                    <li><strong>Profile Summary (1.5x weight):</strong> Bio and professional summary</li>
+                                    <li><strong>Job Title (3.0x weight):</strong> Relevance of current/past job titles</li>
+                                    <li><strong>Profile Summary (2.0x weight):</strong> Bio and professional summary</li>
+                                    <li><strong>Skills Match (1.5x weight):</strong> Candidate skills matching job requirements</li>
+                                    <li><strong>Experience (1.5x weight):</strong> Work experience and responsibilities</li>
                                 </ul>
                             </div>
                             <div class="col-md-6">

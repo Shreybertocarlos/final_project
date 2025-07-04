@@ -115,29 +115,38 @@ class CandidateBM25Service
     {
         $content = [];
 
-        // Job skills (weight: 3x) - Highest priority
+        // Job Title (weight: 3.0x) - Highest priority for job matching
+        $content[] = str_repeat($job->title . ' ', 3);
+
+        // Job description (weight: 2.0x) - Profile Summary content matching
+        $content[] = str_repeat(strip_tags($job->description) . ' ', 2);
+
+        // Job skills (weight: 1.5x) - Skills Match criteria
         $jobSkills = DB::table('job_skills')
                        ->join('skills', 'job_skills.skill_id', '=', 'skills.id')
                        ->where('job_skills.job_id', $job->id)
                        ->pluck('skills.name');
 
         foreach ($jobSkills as $skillName) {
-            $content[] = str_repeat($skillName . ' ', 3);
+            $content[] = $skillName . ' ' . substr($skillName, 0, (int)(strlen($skillName)/2));
         }
 
-        // Job title (weight: 2.5x)
-        $content[] = str_repeat($job->title . ' ', 2) . substr($job->title, 0, (int)(strlen($job->title)/2));
-
-        // Job description (weight: 2x)
-        $content[] = str_repeat(strip_tags($job->description) . ' ', 2);
-
-        // Job category (weight: 1.5x)
+        // Job category and role (weight: 1.5x) - Experience matching
         $jobCategory = DB::table('job_categories')
                          ->where('id', $job->job_category_id)
                          ->first();
 
         if ($jobCategory) {
             $content[] = $jobCategory->name . ' ' . substr($jobCategory->name, 0, (int)(strlen($jobCategory->name)/2));
+        }
+
+        // Job role for experience matching (weight: 1.5x)
+        $jobRole = DB::table('job_roles')
+                     ->where('id', $job->job_role_id)
+                     ->first();
+
+        if ($jobRole) {
+            $content[] = $jobRole->name . ' ' . substr($jobRole->name, 0, (int)(strlen($jobRole->name)/2));
         }
 
         // Combine all content and tokenize

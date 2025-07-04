@@ -51,31 +51,35 @@ class CandidateIndexListener
             // Collect content with weighting strategy
             $content = [];
 
-            // Skills (weight: 3x) - Highest priority for job matching
+            // Job Title (weight: 3.0x) - Highest priority for job matching
+            if ($candidate->title) {
+                $content[] = str_repeat($candidate->title . ' ', 3);
+            }
+
+            // Experience designations (weight: 3.0x) - Job titles from experience
+            foreach ($candidate->experiences as $experience) {
+                if ($experience->designation) {
+                    $content[] = str_repeat($experience->designation . ' ', 3);
+                }
+            }
+
+            // Profile Summary (weight: 2.0x) - Bio and professional summary content
+            if ($candidate->bio) {
+                $content[] = str_repeat($candidate->bio . ' ', 2);
+            }
+
+            // Skills Match (weight: 1.5x) - Candidate skills matching job requirements
             foreach ($candidate->skills as $candidateSkill) {
                 if ($candidateSkill->skill) {
-                    $content[] = str_repeat($candidateSkill->skill->name . ' ', 3);
+                    $content[] = $candidateSkill->skill->name . ' ' . substr($candidateSkill->skill->name, 0, (int)(strlen($candidateSkill->skill->name)/2));
                 }
             }
 
-            // Current title/designation (weight: 2.5x) - Second priority
-            if ($candidate->title) {
-                $content[] = str_repeat($candidate->title . ' ', 2) . substr($candidate->title, 0, (int)(strlen($candidate->title)/2));
-            }
-
-            // Experience responsibilities and designations (weight: 2x) - Third priority
+            // Experience (weight: 1.5x) - Work experience and responsibilities description
             foreach ($candidate->experiences as $experience) {
                 if ($experience->responsibilities) {
-                    $content[] = str_repeat(strip_tags($experience->responsibilities) . ' ', 2);
+                    $content[] = strip_tags($experience->responsibilities) . ' ' . substr(strip_tags($experience->responsibilities), 0, (int)(strlen(strip_tags($experience->responsibilities))/2));
                 }
-                if ($experience->designation) {
-                    $content[] = str_repeat($experience->designation . ' ', 2);
-                }
-            }
-
-            // Bio/summary (weight: 1.5x) - Fourth priority
-            if ($candidate->bio) {
-                $content[] = $candidate->bio . ' ' . substr($candidate->bio, 0, (int)(strlen($candidate->bio)/2));
             }
 
             // Education degrees (weight: 1x) - Base weight
