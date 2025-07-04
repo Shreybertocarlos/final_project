@@ -51,6 +51,7 @@
                                         <th>Candidate Details</th>
                                         <th style="width: 150px;">Relevance Score</th>
                                         <th style="width: 120px;">Experience</th>
+                                        <th style="width: 140px;">Application Status</th>
                                         <th style="width: 120px;">Action</th>
                                     </tr>
                                 </thead>
@@ -112,6 +113,11 @@
                                                 </span>
                                             </td>
                                             <td class="text-center">
+                                                <span class="badge {{ $application->status_badge_class }}">
+                                                    {{ $application->status_label }}
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
                                                 <a href="{{ route('candidates.show', ['slug' => $application->candidate->slug, 'job_id' => $job->id]) }}"
                                                    class="btn btn-primary btn-sm">
                                                     <i class="fas fa-eye"></i> View Profile
@@ -120,7 +126,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5" class="text-center py-4">
+                                            <td colspan="6" class="text-center py-4">
                                                 <div class="text-muted">
                                                     <i class="fas fa-users fa-3x mb-3"></i>
                                                     <h5>No Applications Found</h5>
